@@ -10,15 +10,7 @@ npm install react-native-alert-queue
 
 ## Usage
 
-
-```js
-import { multiply } from 'react-native-alert-queue';
-
-// ...
-
-const result = await multiply(3, 7);
-```
-
+**👷‍♂️ WIP 👷‍♂️**
 
 ## Contributing
 
