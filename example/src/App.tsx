@@ -1,9 +1,21 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
+
+import { alert, AlertContainer } from 'react-native-alert-queue';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Example will be here</Text>
+      <Pressable
+        onPress={() =>
+          alert.show({
+            title: 'Hello',
+            message: 'I am an alert',
+          })
+        }
+      >
+        <Text>Show Alert</Text>
+      </Pressable>
+      <AlertContainer />
     </View>
   );
 }

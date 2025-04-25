@@ -1,4 +1,7 @@
-import type { Props as AlertProps } from './components/Alert/types';
+import type {
+  Props as AlertProps,
+  ViewProps as AlertViewProps,
+} from '../../components/Alert/types';
 
 export type Alert = {
   clearQueue: (hideDisplayedAlert?: boolean) => void;
@@ -10,4 +13,12 @@ export type Alert = {
   show: <R = unknown>(alert: AlertProps<R>) => Promise<R>;
   success: <R = unknown>(alert: AlertProps<R>) => Promise<R>;
   update: <R = unknown>(alert: AlertProps<R>) => void;
+};
+
+export type CurrentAlert = AlertProps & Pick<AlertViewProps, 'resolve'>;
+
+export type { AlertProps };
+
+export type Props = {
+  animationDuration?: number;
 };

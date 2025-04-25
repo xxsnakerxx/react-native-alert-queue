@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import type { ViewProps } from './types';
-import { alert } from '../../alert.api';
+import { alert } from '../../containers/AlertContainer/alert.api';
 
 export const useController = <R = unknown>({
   onAwaitableDismiss,

@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   titleContainer: {
+    flexDirection: 'row',
     paddingTop: 0,
     paddingBottom: 15,
     paddingHorizontal: 20,

@@ -117,7 +117,9 @@ export const Alert: FC<ViewProps> = (props) => {
   const renderCloseButtonCb = useCallback(() => {
     return isDismissible ? (
       <Pressable onPress={onDismissButtonPress}>
-        <CloseIcon width={24} height={24} fill="gray" />
+        <View style={styles.closeButton}>
+          <CloseIcon width={24} height={24} fill="gray" />
+        </View>
       </Pressable>
     ) : null;
   }, [isDismissible, onDismissButtonPress]);
