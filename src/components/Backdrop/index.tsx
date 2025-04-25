@@ -4,9 +4,12 @@ import { Animated, StyleSheet } from 'react-native';
 import type { Props } from './types';
 
 import { useAnimation } from '../../hooks/useAnimation';
-import { styles } from './styles';
 
-export const Backdrop: FC<Props> = ({ animationDuration, isHiding }) => {
+export const Backdrop: FC<Props> = ({
+  animationDuration,
+  isHiding,
+  backgroundColor = 'rgba(0, 0, 0, 0.5)',
+}) => {
   const { animation } = useAnimation({ animationDuration, isHiding });
 
   const animatedStyle = useMemo(
@@ -20,9 +23,14 @@ export const Backdrop: FC<Props> = ({ animationDuration, isHiding }) => {
     [animation]
   );
 
-  return (
-    <Animated.View
-      style={StyleSheet.compose(styles.container, animatedStyle)}
-    />
+  const style = useMemo(
+    () =>
+      StyleSheet.compose(
+        StyleSheet.absoluteFillObject,
+        StyleSheet.compose(animatedStyle, { backgroundColor })
+      ),
+    [animatedStyle, backgroundColor]
   );
+
+  return <Animated.View style={style} />;
 };
