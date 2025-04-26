@@ -93,7 +93,7 @@ export const Alert: FC<ViewProps> = (props) => {
 
   const renderMessageCb = useCallback(() => {
     const message = props.message ? (
-      <Text>{props.message}</Text>
+      <Text style={styles.message}>{props.message}</Text>
     ) : (
       props.renderMessage?.() || null
     );
@@ -109,7 +109,9 @@ export const Alert: FC<ViewProps> = (props) => {
     const Svg = icon;
 
     return Svg ? (
-      <Svg fill={iconColor} width={iconSize} height={iconSize} />
+      <View style={styles.iconContainer}>
+        <Svg fill={iconColor} width={iconSize} height={iconSize} />
+      </View>
     ) : null;
   }, [icon, iconColor, iconSize]);
 

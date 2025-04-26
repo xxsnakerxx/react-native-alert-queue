@@ -27,6 +27,10 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
     marginHorizontal: 20,
   },
+  iconContainer: {
+    alignItems: 'center',
+    marginBottom: 10,
+  },
   titleContainer: {
     flexDirection: 'row',
     paddingTop: 0,

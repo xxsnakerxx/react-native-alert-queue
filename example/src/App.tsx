@@ -35,6 +35,20 @@ export default function App() {
                 }}
                 text="Show 2 Alerts"
               />
+              <Button
+                onPress={() => {
+                  alert.success({
+                    message: 'I am a success alert',
+                  });
+                }}
+                text="Show Success Alert"
+              />
+              <Button
+                onPress={() => {
+                  alert.error(new Error('I am an error alert'));
+                }}
+                text="Show Error Alert"
+              />
             </View>
           </ScrollView>
         </SafeAreaView>

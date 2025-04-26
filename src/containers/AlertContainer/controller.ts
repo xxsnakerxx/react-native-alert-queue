@@ -2,7 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import type { AlertProps, CurrentAlert, Props } from './types';
 
-// import SuccessSvg from '../../../../assets/icons/primary/Tick Square.svg';
+import { InfoIcon } from '../../components/icons/Info';
+import { SuccessIcon } from '../../components/icons/Success';
 import { EventEmitter } from '../../utils/EventEmitter';
 
 import { usePlatformController } from './controller.platform';
@@ -175,6 +176,9 @@ export const useController = ({ animationDuration }: Props) => {
   const showError = useCallback(
     (error: Error) => {
       show({
+        icon: InfoIcon,
+        iconColor: 'red',
+        iconSize: 72,
         message: error.message,
         title: 'Oops! Something went wrong!',
       });
@@ -185,8 +189,8 @@ export const useController = ({ animationDuration }: Props) => {
   const success = useCallback(
     (alert?: AlertProps) => {
       show({
-        // icon: SuccessSvg,
-        iconColor: 'icon.primary',
+        icon: SuccessIcon,
+        iconColor: 'green',
         iconSize: 72,
         title: 'Success!',
         ...alert,
