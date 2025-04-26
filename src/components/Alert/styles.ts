@@ -71,4 +71,11 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#000',
   },
+  buttonsContainer: {
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    marginHorizontal: 20,
+    marginBottom: 20,
+    gap: 10,
+  },
 });

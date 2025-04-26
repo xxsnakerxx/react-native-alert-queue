@@ -8,15 +8,16 @@ import {
   View,
 } from 'react-native';
 
-import type { ViewProps } from './types';
+import type { AlertViewProps } from './types';
 
 import { CloseIcon } from '../../components/icons/Close';
 
 import { useAnimation } from '../../hooks/useAnimation';
 import { useController } from './controller';
 import { styles, useContainerDimensions } from './styles';
+import { Button } from '../Button';
 
-export const Alert: FC<ViewProps> = (props) => {
+export const Alert: FC<AlertViewProps> = (props) => {
   const {
     afterButtonsSlot,
     animationDuration,
@@ -30,6 +31,7 @@ export const Alert: FC<ViewProps> = (props) => {
     isDismissible,
     isHiding,
     testID,
+    buttons,
     titleAlign = 'center',
   } = props;
 
@@ -38,7 +40,7 @@ export const Alert: FC<ViewProps> = (props) => {
     isHiding,
   });
 
-  const { onDismissButtonPress } = useController(props);
+  const { onDismissButtonPress, onButtonPress } = useController(props);
 
   const containerDimensions = useContainerDimensions();
 
@@ -131,6 +133,24 @@ export const Alert: FC<ViewProps> = (props) => {
     return dismissButton;
   }, [isDismissible, onDismissButtonPress, renderDismissButton]);
 
+  const renderButtons = useCallback(() => {
+    if (buttons?.length) {
+      return (
+        <View style={styles.buttonsContainer}>
+          {buttons.map((button) => (
+            <Button
+              key={button.text}
+              text={button.text}
+              onPress={() => onButtonPress(button)}
+            />
+          ))}
+        </View>
+      );
+    }
+
+    return null;
+  }, [buttons, onButtonPress]);
+
   return (
     <Animated.View style={containerStyle} testID={testID || 'Alert'}>
       {renderIconCb()}
@@ -140,7 +160,7 @@ export const Alert: FC<ViewProps> = (props) => {
       {renderMessageCb()}
       {beforeButtonsSlot?.() || null}
       {renderDismissButtonCb()}
-      {/* ADD BUTTONS HERE  */}
+      {renderButtons()}
       {afterButtonsSlot?.() || null}
     </Animated.View>
   );

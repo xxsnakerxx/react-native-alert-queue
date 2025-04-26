@@ -28,11 +28,20 @@ export interface Props<R = unknown> {
   }: {
     onPress: () => void;
   }) => ReactElement<any>;
+  buttons?: AlertButton[];
   title?: string;
   titleAlign?: 'center' | 'left' | 'right';
 }
 
-export type ViewProps<R = unknown> = Props<R> & {
+export type AlertButton<R = unknown> = {
+  text: string;
+  onClick?: (() => Promise<R>) | (() => R);
+  testID?: string;
+  hideAlertOnPress?: boolean;
+  onAwaitablePress?: (resolve: (value: R) => void) => void;
+};
+
+export type AlertViewProps<R = unknown> = Props<R> & {
   animationDuration: number;
   isHiding: boolean;
   resolve: (value?: R) => void;

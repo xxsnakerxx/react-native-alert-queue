@@ -1,6 +1,6 @@
 import type {
   Props as AlertProps,
-  ViewProps as AlertViewProps,
+  AlertViewProps as AlertViewProps,
 } from '../../components/Alert/types';
 
 export type Alert = {

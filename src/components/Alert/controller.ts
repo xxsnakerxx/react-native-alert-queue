@@ -1,13 +1,34 @@
 import { useCallback } from 'react';
 
-import type { ViewProps } from './types';
+import type { AlertButton, AlertViewProps } from './types';
 import { alert } from '../../containers/AlertContainer/alert.api';
 
 export const useController = <R = unknown>({
   onAwaitableDismiss,
   onDismiss,
   resolve,
-}: ViewProps<R>) => {
+}: AlertViewProps<R>) => {
+  const onButtonPress = useCallback(
+    (button: AlertButton<R>) => {
+      const resolveWrapper = (value: R) => {
+        resolve(value);
+
+        if (button.hideAlertOnPress !== false) {
+          alert.hide();
+        }
+      };
+
+      if (button.onAwaitablePress) {
+        button.onAwaitablePress(resolveWrapper);
+      } else {
+        button.onClick?.();
+
+        resolveWrapper(undefined as R);
+      }
+    },
+    [resolve]
+  );
+
   const onDismissButtonPress = useCallback(() => {
     const resolveWrapper = (value: R) => {
       resolve(value);
@@ -24,5 +45,5 @@ export const useController = <R = unknown>({
     }
   }, [onAwaitableDismiss, onDismiss, resolve]);
 
-  return { onDismissButtonPress };
+  return { onDismissButtonPress, onButtonPress };
 };
