@@ -23,6 +23,7 @@ export const Alert: FC<ViewProps> = (props) => {
     beforeButtonsSlot,
     beforeMessageSlot,
     beforeTitleSlot,
+    renderDismissButton,
     icon,
     iconColor = 'black',
     iconSize,
@@ -115,13 +116,20 @@ export const Alert: FC<ViewProps> = (props) => {
     ) : null;
   }, [icon, iconColor, iconSize]);
 
-  const renderCloseButtonCb = useCallback(() => {
-    return isDismissible ? (
+  const renderDismissButtonCb = useCallback(() => {
+    const defaultDismissButton = (
       <Pressable onPress={onDismissButtonPress} style={styles.closeButton}>
         <CloseIcon width={24} height={24} fill="gray" />
       </Pressable>
-    ) : null;
-  }, [isDismissible, onDismissButtonPress]);
+    );
+
+    const dismissButton = isDismissible
+      ? renderDismissButton?.({ onPress: onDismissButtonPress }) ||
+        defaultDismissButton
+      : null;
+
+    return dismissButton;
+  }, [isDismissible, onDismissButtonPress, renderDismissButton]);
 
   return (
     <Animated.View style={containerStyle} testID={testID || 'Alert'}>
@@ -131,7 +139,7 @@ export const Alert: FC<ViewProps> = (props) => {
       {beforeMessageSlot?.() || null}
       {renderMessageCb()}
       {beforeButtonsSlot?.() || null}
-      {renderCloseButtonCb()}
+      {renderDismissButtonCb()}
       {/* ADD BUTTONS HERE  */}
       {afterButtonsSlot?.() || null}
     </Animated.View>

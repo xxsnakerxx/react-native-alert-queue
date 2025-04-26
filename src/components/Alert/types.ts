@@ -23,6 +23,11 @@ export interface Props<R = unknown> {
   onDismiss?: (() => Promise<R>) | (() => R);
   renderMessage?: () => ReactElement<any>;
   renderTitle?: () => ReactElement<any>;
+  renderDismissButton?: ({
+    onPress,
+  }: {
+    onPress: () => void;
+  }) => ReactElement<any>;
   title?: string;
   titleAlign?: 'center' | 'left' | 'right';
 }
