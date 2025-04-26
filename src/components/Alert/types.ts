@@ -36,7 +36,7 @@ export interface Props<R = unknown> {
 
 export type AlertButton<R = unknown> = {
   text: string;
-  onClick?: (() => Promise<R>) | (() => R);
+  onPress?: (() => Promise<R>) | (() => R);
   testID?: string;
   hideAlertOnPress?: boolean;
   onAwaitablePress?: (resolve: (value: R) => void) => void;

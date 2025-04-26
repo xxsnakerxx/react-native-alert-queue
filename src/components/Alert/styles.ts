@@ -39,6 +39,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  dismissibleTitleContainer: {
+    paddingHorizontal: 60,
+  },
   title: {
     fontSize: 20,
     lineHeight: 28,

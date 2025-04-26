@@ -21,7 +21,7 @@ export const useController = <R = unknown>({
       if (button.onAwaitablePress) {
         button.onAwaitablePress(resolveWrapper);
       } else {
-        button.onClick?.();
+        button.onPress?.();
 
         resolveWrapper(undefined as R);
       }

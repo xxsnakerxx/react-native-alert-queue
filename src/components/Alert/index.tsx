@@ -6,6 +6,8 @@ import {
   StyleSheet,
   Text,
   View,
+  type StyleProp,
+  type ViewStyle,
 } from 'react-native';
 
 import type { AlertViewProps } from './types';
@@ -32,7 +34,9 @@ export const Alert: FC<AlertViewProps> = (props) => {
     isHiding,
     testID,
     buttons,
+    title,
     titleAlign = 'center',
+    renderTitle,
   } = props;
 
   const { animation } = useAnimation({
@@ -77,22 +81,38 @@ export const Alert: FC<AlertViewProps> = (props) => {
     [containerAnimation, containerDimensions]
   );
 
+  const beforeTitleSlotElement = useMemo(() => {
+    return beforeTitleSlot?.() || null;
+  }, [beforeTitleSlot]);
+
   const titleStyle = useMemo(
     () => StyleSheet.compose(styles.title, { textAlign: titleAlign }),
     [titleAlign]
   );
 
+  const titleContainerStyle = useMemo(() => {
+    const style: StyleProp<ViewStyle>[] = [styles.titleContainer];
+
+    if (isDismissible && !(icon || beforeTitleSlotElement)) {
+      style.push(styles.dismissibleTitleContainer);
+    }
+
+    return StyleSheet.flatten(style);
+  }, [isDismissible, icon, beforeTitleSlotElement]);
+
   const renderTitleCb = useCallback(() => {
-    const title = props.title ? (
+    const titleElement = title ? (
       <Text numberOfLines={4} style={titleStyle}>
-        {props.title}
+        {title}
       </Text>
     ) : (
-      props.renderTitle?.() || null
+      renderTitle?.() || null
     );
 
-    return title ? <View style={styles.titleContainer}>{title}</View> : null;
-  }, [props, titleStyle]);
+    return titleElement ? (
+      <View style={titleContainerStyle}>{titleElement}</View>
+    ) : null;
+  }, [title, titleStyle, renderTitle, titleContainerStyle]);
 
   const renderMessageCb = useCallback(() => {
     const message = props.message ? (
@@ -154,7 +174,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
   return (
     <Animated.View style={containerStyle} testID={testID || 'Alert'}>
       {renderIconCb()}
-      {beforeTitleSlot?.() || null}
+      {beforeTitleSlotElement}
       {renderTitleCb()}
       {beforeMessageSlot?.() || null}
       {renderMessageCb()}

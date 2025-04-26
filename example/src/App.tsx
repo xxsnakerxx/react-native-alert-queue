@@ -36,6 +36,31 @@ export default function App() {
                 text="Show 2 Alerts"
               />
               <Button
+                onPress={async () => {
+                  await alert.show({
+                    title: 'Lorem ipsum dolor sit amet',
+                    message: 'I am a dismissible alert',
+                    isDismissible: true,
+                    onDismiss: () => {
+                      alert.success({
+                        message: 'You dismissed the alert',
+                      });
+                    },
+                    buttons: [
+                      {
+                        text: 'OK',
+                        onPress: () => {
+                          alert.success({
+                            message: 'You pressed OK button',
+                          });
+                        },
+                      },
+                    ],
+                  });
+                }}
+                text="Show Dismissible Alert"
+              />
+              <Button
                 onPress={() => {
                   alert.success({
                     message: 'I am a success alert',
