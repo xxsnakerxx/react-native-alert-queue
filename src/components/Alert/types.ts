@@ -3,6 +3,7 @@ import type { ColorValue } from 'react-native';
 
 type IconProps = {
   fill?: ColorValue;
+  stroke?: ColorValue;
   width?: number;
   height?: number;
 };
@@ -39,6 +40,10 @@ export type AlertButton<R = unknown> = {
   testID?: string;
   hideAlertOnPress?: boolean;
   onAwaitablePress?: (resolve: (value: R) => void) => void;
+};
+
+export type ConfirmProps = Omit<Props, 'buttons'> & {
+  buttons?: string[];
 };
 
 export type AlertViewProps<R = unknown> = Props<R> & {

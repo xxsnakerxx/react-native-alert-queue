@@ -8,6 +8,7 @@ import { EventEmitter } from '../../utils/EventEmitter';
 
 import { usePlatformController } from './controller.platform';
 import { processAlertProps } from './utils';
+import type { ConfirmProps } from '../../components/Alert/types';
 
 export const useController = ({ animationDuration }: Props) => {
   const [isShown, setIsShown] = useState(false);
@@ -136,36 +137,43 @@ export const useController = ({ animationDuration }: Props) => {
   const getAlert = useCallback(() => currentAlert, [currentAlert]);
 
   const confirm = useCallback(
-    (alert?: AlertProps) => {
+    (alert?: ConfirmProps) => {
       const title = alert?.title || 'Are you sure?';
 
-      // const buttons: Required<AlertProps<boolean>>['buttons'] =
-      //   alert?.buttons?.length === 2
-      //     ? [
-      //         {
-      //           label: alert.buttons[0]!,
-      //           onAwaitableClick: (resolve) => resolve(true),
-      //           scheme: alert.confirmButtonScheme || 'primary',
-      //         },
-      //         {
-      //           label: alert.buttons[1]!,
-      //           onAwaitableClick: (resolve) => resolve(false),
-      //         },
-      //       ]
-      //     : [
-      //         {
-      //           label: 'Yes',
-      //           onAwaitableClick: (resolve) => resolve(true),
-      //           scheme: alert?.confirmButtonScheme || 'primary',
-      //         },
-      //         {
-      //           label: 'No',
-      //           onAwaitableClick: (resolve) => resolve(false),
-      //         },
-      //       ];
+      const passedButtons = alert?.buttons;
+
+      let buttons: Required<AlertProps<boolean>>['buttons'] = [
+        {
+          text: 'Yes',
+          onAwaitablePress: (resolve) => resolve(true),
+        },
+        {
+          text: 'No',
+          onAwaitablePress: (resolve) => resolve(false),
+        },
+      ];
+
+      if (passedButtons?.length !== 2) {
+        console.warn(
+          `[React Native Alert Queue] Confirm props must have 2 buttons, got ${passedButtons?.length}`,
+          alert
+        );
+      } else {
+        buttons = [
+          {
+            text: passedButtons[0]!,
+            onAwaitablePress: (resolve) => resolve(true),
+          },
+          {
+            text: passedButtons[1]!,
+            onAwaitablePress: (resolve) => resolve(false),
+          },
+        ];
+      }
 
       return show({
         ...alert,
+        buttons,
         title,
       });
     },

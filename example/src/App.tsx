@@ -49,6 +49,22 @@ export default function App() {
                 }}
                 text="Show Error Alert"
               />
+              <Button
+                onPress={async () => {
+                  const result = await alert.confirm({
+                    message: 'I am a confirm dialog',
+                  });
+
+                  if (result) {
+                    alert.success({
+                      message: 'You pressed yes',
+                    });
+                  } else {
+                    alert.error(new Error('You pressed no'));
+                  }
+                }}
+                text="Show Confirm"
+              />
             </View>
           </ScrollView>
         </SafeAreaView>
