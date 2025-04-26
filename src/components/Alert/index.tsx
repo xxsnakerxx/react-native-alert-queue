@@ -10,8 +10,7 @@ import {
 
 import type { ViewProps } from './types';
 
-// @ts-ignore: TODO: fix this
-import CloseIcon from '../../assets/close.svg';
+import { CloseIcon } from '../../components/icons/Close';
 
 import { useAnimation } from '../../hooks/useAnimation';
 import { useController } from './controller';
@@ -116,10 +115,8 @@ export const Alert: FC<ViewProps> = (props) => {
 
   const renderCloseButtonCb = useCallback(() => {
     return isDismissible ? (
-      <Pressable onPress={onDismissButtonPress}>
-        <View style={styles.closeButton}>
-          <CloseIcon width={24} height={24} fill="gray" />
-        </View>
+      <Pressable onPress={onDismissButtonPress} style={styles.closeButton}>
+        <CloseIcon width={24} height={24} fill="gray" />
       </Pressable>
     ) : null;
   }, [isDismissible, onDismissButtonPress]);

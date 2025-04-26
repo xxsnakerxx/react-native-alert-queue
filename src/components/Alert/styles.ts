@@ -48,10 +48,11 @@ export const styles = StyleSheet.create({
     height: 28,
     borderRadius: 14,
     position: 'absolute',
-    right: 20,
-    top: 20,
+    right: 16,
+    top: 16,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ccc',
   },
   messageContainer: {
     paddingHorizontal: 20,
