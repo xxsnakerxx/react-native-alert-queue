@@ -38,7 +38,11 @@ export const KeyboardAvoiding = () => {
             },
           });
 
-          alert.success({ message: `Reason: ${reason}` });
+          if (reason) {
+            alert.success({ message: `Reason: ${reason}` });
+          } else {
+            alert.error(new Error('Reason is required'));
+          }
         }}
         text="Show reason alert"
       />
