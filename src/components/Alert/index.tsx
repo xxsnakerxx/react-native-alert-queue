@@ -35,8 +35,9 @@ export const Alert: FC<AlertViewProps> = (props) => {
     testID,
     buttons,
     title,
-    titleAlign = 'center',
     renderTitle,
+    message,
+    renderMessage,
   } = props;
 
   const { animation } = useAnimation({
@@ -85,11 +86,6 @@ export const Alert: FC<AlertViewProps> = (props) => {
     return beforeTitleSlot?.() || null;
   }, [beforeTitleSlot]);
 
-  const titleStyle = useMemo(
-    () => StyleSheet.compose(styles.title, { textAlign: titleAlign }),
-    [titleAlign]
-  );
-
   const titleContainerStyle = useMemo(() => {
     const style: StyleProp<ViewStyle>[] = [styles.titleContainer];
 
@@ -102,31 +98,31 @@ export const Alert: FC<AlertViewProps> = (props) => {
 
   const renderTitleCb = useCallback(() => {
     const titleElement = title ? (
-      <Text numberOfLines={4} style={titleStyle}>
+      <Text numberOfLines={4} style={styles.title}>
         {title}
       </Text>
     ) : (
-      renderTitle?.() || null
+      renderTitle?.({ style: styles.title, text: title ?? '' }) || null
     );
 
     return titleElement ? (
       <View style={titleContainerStyle}>{titleElement}</View>
     ) : null;
-  }, [title, titleStyle, renderTitle, titleContainerStyle]);
+  }, [title, renderTitle, titleContainerStyle]);
 
   const renderMessageCb = useCallback(() => {
-    const message = props.message ? (
-      <Text style={styles.message}>{props.message}</Text>
+    const messageElement = message ? (
+      <Text style={styles.message}>{message}</Text>
     ) : (
-      props.renderMessage?.() || null
+      renderMessage?.({ style: styles.message, text: message ?? '' }) || null
     );
 
-    return message ? (
+    return messageElement ? (
       <ScrollView bounces={false} style={styles.messageContainer}>
-        {message}
+        {messageElement}
       </ScrollView>
     ) : null;
-  }, [props]);
+  }, [message, renderMessage]);
 
   const renderIconCb = useCallback(() => {
     const Svg = icon;

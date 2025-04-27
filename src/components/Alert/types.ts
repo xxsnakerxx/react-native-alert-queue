@@ -1,5 +1,5 @@
-import type { ReactElement } from 'react';
-import type { ColorValue } from 'react-native';
+import type { ReactElement, FC } from 'react';
+import type { ColorValue, StyleProp, TextStyle } from 'react-native';
 
 type IconProps = {
   fill?: ColorValue;
@@ -15,15 +15,27 @@ export interface Props<R = unknown> {
   beforeButtonsSlot?: () => ReactElement<any>;
   beforeMessageSlot?: () => ReactElement<any>;
   beforeTitleSlot?: () => ReactElement<any>;
-  icon?: React.FC<IconProps>;
+  icon?: FC<IconProps>;
   iconColor?: ColorValue;
   iconSize?: number;
   isDismissible?: boolean;
   message?: string;
   onAwaitableDismiss?: (resolve: (value: R) => void) => void;
   onDismiss?: (() => Promise<R>) | (() => R);
-  renderMessage?: () => ReactElement<any>;
-  renderTitle?: () => ReactElement<any>;
+  renderMessage?: ({
+    style,
+    text,
+  }: {
+    style: StyleProp<TextStyle>;
+    text: string;
+  }) => ReactElement<any>;
+  renderTitle?: ({
+    style,
+    text,
+  }: {
+    style: StyleProp<TextStyle>;
+    text: string;
+  }) => ReactElement<any>;
   renderDismissButton?: ({
     onPress,
   }: {
@@ -31,7 +43,6 @@ export interface Props<R = unknown> {
   }) => ReactElement<any>;
   buttons?: AlertButton[];
   title?: string;
-  titleAlign?: 'center' | 'left' | 'right';
 }
 
 export type AlertButton<R = unknown> = {
