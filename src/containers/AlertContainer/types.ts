@@ -16,7 +16,9 @@ export type Alert = {
   update: <R = unknown>(alert: AlertProps<R>) => void;
 };
 
-export type CurrentAlert = AlertProps & Pick<AlertViewProps, 'resolve'>;
+export type CurrentAlert = AlertProps &
+  Pick<AlertViewProps, 'resolve'> &
+  Pick<Props, 'config'>;
 
 export type { AlertProps };
 
@@ -27,4 +29,10 @@ export type Props = {
 
 export type AlertConfig = {
   backdropBackgroundColor?: ColorValue;
+  success?: Partial<
+    Pick<AlertProps, 'icon' | 'iconColor' | 'iconSize' | 'title'>
+  >;
+  error?: Partial<
+    Pick<AlertProps, 'icon' | 'iconColor' | 'iconSize' | 'title'>
+  >;
 };

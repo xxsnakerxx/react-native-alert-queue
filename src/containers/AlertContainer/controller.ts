@@ -10,7 +10,7 @@ import { usePlatformController } from './controller.platform';
 import { processAlertProps } from './utils';
 import type { ConfirmProps } from '../../components/Alert/types';
 
-export const useController = ({ animationDuration }: Props) => {
+export const useController = ({ animationDuration, config }: Props) => {
   const [isShown, setIsShown] = useState(false);
   const [isHiding, setIsHiding] = useState(false);
   const [currentAlert, setCurrentAlert] = useState<CurrentAlert>();
@@ -44,7 +44,7 @@ export const useController = ({ animationDuration }: Props) => {
         alert = processAlertProps(alert);
 
         if (isShownRef.current) {
-          queue.current.push({ ...alert, resolve });
+          queue.current.push({ ...alert, resolve, config });
 
           return;
         }
@@ -55,10 +55,10 @@ export const useController = ({ animationDuration }: Props) => {
 
         onShow();
 
-        setCurrentAlert({ ...alert, resolve });
+        setCurrentAlert({ ...alert, resolve, config });
       });
     },
-    [onShow]
+    [onShow, config]
   );
 
   const update = useCallback(
@@ -71,9 +71,9 @@ export const useController = ({ animationDuration }: Props) => {
 
       onBeforeUpdate();
 
-      setCurrentAlert((prev) => ({ ...alert, resolve: prev!.resolve }));
+      setCurrentAlert((prev) => ({ ...alert, resolve: prev!.resolve, config }));
     },
-    [onBeforeUpdate]
+    [onBeforeUpdate, config]
   );
 
   useEffect(() => {
@@ -184,28 +184,31 @@ export const useController = ({ animationDuration }: Props) => {
 
   const showError = useCallback(
     (error: Error) => {
+      const { error: errorConfig } = config || {};
+
       show({
-        icon: InfoIcon,
-        iconColor: 'red',
-        iconSize: 72,
+        icon: errorConfig?.icon ?? InfoIcon,
+        iconColor: errorConfig?.iconColor ?? 'red',
+        iconSize: errorConfig?.iconSize ?? 72,
         message: error.message,
-        title: 'Oops! Something went wrong!',
+        title: errorConfig?.title ?? 'Oops! Something went wrong!',
       });
     },
-    [show]
+    [show, config]
   );
 
   const success = useCallback(
     (alert?: AlertProps) => {
+      const { success: successConfig } = config || {};
       show({
-        icon: SuccessIcon,
-        iconColor: 'green',
-        iconSize: 72,
-        title: 'Success!',
+        icon: successConfig?.icon ?? SuccessIcon,
+        iconColor: successConfig?.iconColor ?? 'green',
+        iconSize: successConfig?.iconSize ?? 72,
+        title: successConfig?.title ?? 'Success!',
         ...alert,
       });
     },
-    [show]
+    [show, config]
   );
 
   return {
