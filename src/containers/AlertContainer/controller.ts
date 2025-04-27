@@ -174,6 +174,7 @@ export const useController = ({ animationDuration }: Props) => {
       return show({
         ...alert,
         buttons,
+        buttonsDirection: 'row',
         title,
       });
     },

@@ -18,6 +18,7 @@ export const Button = ({
 
 const styles = StyleSheet.create({
   button: {
+    flexGrow: 1,
     backgroundColor: '#f0f0f0',
     borderRadius: 10,
     paddingVertical: 10,

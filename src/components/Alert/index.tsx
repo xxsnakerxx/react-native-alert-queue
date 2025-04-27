@@ -34,6 +34,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
     isHiding,
     testID,
     buttons,
+    buttonsDirection = 'column',
     title,
     renderTitle,
     message,
@@ -75,10 +76,11 @@ export const Alert: FC<AlertViewProps> = (props) => {
 
   const containerStyle = useMemo(
     () =>
-      StyleSheet.compose(
-        StyleSheet.compose(styles.container, containerDimensions),
-        containerAnimation
-      ),
+      StyleSheet.flatten([
+        styles.container,
+        containerDimensions,
+        containerAnimation,
+      ]),
     [containerAnimation, containerDimensions]
   );
 
@@ -149,10 +151,16 @@ export const Alert: FC<AlertViewProps> = (props) => {
     return dismissButton;
   }, [isDismissible, onDismissButtonPress, renderDismissButton]);
 
+  const buttonsContainerStyle = useMemo(() => {
+    return StyleSheet.compose(styles.buttonsContainer, {
+      flexDirection: buttonsDirection,
+    });
+  }, [buttonsDirection]);
+
   const renderButtons = useCallback(() => {
     if (buttons?.length) {
       return (
-        <View style={styles.buttonsContainer}>
+        <View style={buttonsContainerStyle}>
           {buttons.map((button) => (
             <Button
               key={button.text}
@@ -165,7 +173,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
     }
 
     return null;
-  }, [buttons, onButtonPress]);
+  }, [buttons, onButtonPress, buttonsContainerStyle]);
 
   return (
     <Animated.View style={containerStyle} testID={testID || 'Alert'}>

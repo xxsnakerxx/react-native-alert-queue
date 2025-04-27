@@ -42,6 +42,7 @@ export interface Props<R = unknown> {
     onPress: () => void;
   }) => ReactElement<any>;
   buttons?: AlertButton[];
+  buttonsDirection?: 'row' | 'column';
   title?: string;
 }
 

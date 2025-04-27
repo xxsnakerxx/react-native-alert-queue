@@ -31,6 +31,22 @@ export default function App() {
                   alert.show({
                     title: 'Alert 2',
                     message: 'I am an alert 2',
+                    buttons: [
+                      {
+                        text: 'OK',
+                        onPress: () => {
+                          alert.success({ message: 'You pressed OK button' });
+                        },
+                      },
+                      {
+                        text: 'Cancel',
+                        onPress: () => {
+                          alert.success({
+                            message: 'You pressed Cancel button',
+                          });
+                        },
+                      },
+                    ],
                   });
                 }}
                 text="Show 2 Alerts"
