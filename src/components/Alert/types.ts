@@ -45,12 +45,14 @@ export interface Props<R = unknown> {
   buttons?: AlertButton[];
   buttonsDirection?: 'row' | 'column';
   renderButton?: (
-    props: Pick<AlertButton, 'text' | 'testID' | 'disabled'> & {
+    props: Pick<AlertButton, 'text' | 'testID' | 'disabled' | 'customProps'> & {
       onPress: () => void;
     }
   ) => ReactElement<any>;
   title?: string;
 }
+
+export interface AlertButtonCustomProps {}
 
 export type AlertButton<R = unknown> = {
   text: string;
@@ -59,6 +61,7 @@ export type AlertButton<R = unknown> = {
   testID?: string;
   hideAlertOnPress?: boolean;
   onAwaitablePress?: (resolve: (value: R) => void) => void;
+  customProps?: AlertButtonCustomProps;
 };
 
 export type ConfirmProps = Omit<Props, 'buttons'> & {

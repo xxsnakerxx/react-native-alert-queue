@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/no-unstable-nested-components */
 
-import { alert } from 'react-native-alert-queue';
+import { alert, type AlertButtonCustomProps } from 'react-native-alert-queue';
 import { Button } from '../components/Button';
 import { Section } from '../components/Section';
 import {
@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Text,
   View,
+  type ColorValue,
   type StyleProp,
   type ViewStyle,
 } from 'react-native';
@@ -123,16 +124,22 @@ export const Customizations = () => {
             title: 'Custom buttons',
             buttons: [
               {
-                text: 'Button 1',
+                text: 'Button 1 (default)',
                 onPress: () => alert.success({ message: 'Button 1 pressed' }),
               },
               {
-                text: 'Button 2',
+                text: 'Button 2 (primary)',
                 onPress: () => alert.success({ message: 'Button 2 pressed' }),
+                customProps: {
+                  scheme: 'primary',
+                },
               },
               {
-                text: 'Button 3',
+                text: 'Button 3 (secondary)',
                 onPress: () => alert.success({ message: 'Button 3 pressed' }),
+                customProps: {
+                  scheme: 'secondary',
+                },
               },
             ],
             renderButton: CustomButton,
@@ -163,16 +170,33 @@ const CustomButton = ({
   onPress,
   disabled,
   testID,
+  customProps,
 }: {
   text: string;
   onPress: () => void;
   disabled?: boolean;
   testID?: string;
+  customProps?: AlertButtonCustomProps;
 }) => {
+  const { scheme } = customProps || {};
+
+  let backgroundColor: ColorValue = 'black';
+
+  switch (scheme) {
+    case 'primary':
+      backgroundColor = 'green';
+      break;
+    case 'secondary':
+      backgroundColor = 'blue';
+      break;
+  }
+
   return (
     <Pressable
       onPress={onPress}
-      style={styles.button}
+      style={StyleSheet.compose(styles.button, {
+        backgroundColor,
+      })}
       disabled={disabled}
       testID={testID}
     >

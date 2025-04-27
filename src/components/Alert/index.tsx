@@ -201,6 +201,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
                     onPress: () => onButtonPress(button),
                     disabled: button.disabled,
                     testID: button.testID,
+                    customProps: button.customProps,
                   })}
                 </Fragment>
               );
