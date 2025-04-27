@@ -86,8 +86,8 @@ export const Alert: FC<AlertViewProps> = (props) => {
   );
 
   const beforeTitleSlotElement = useMemo(() => {
-    return beforeTitleSlot?.() || null;
-  }, [beforeTitleSlot]);
+    return beforeTitleSlot?.() || config?.beforeTitleSlot?.() || null;
+  }, [beforeTitleSlot, config]);
 
   const titleContainerStyle = useMemo(() => {
     const style: StyleProp<ViewStyle>[] = [styles.titleContainer];
@@ -105,19 +105,27 @@ export const Alert: FC<AlertViewProps> = (props) => {
         {title}
       </Text>
     ) : (
-      renderTitle?.({ style: styles.title, text: title ?? '' }) || null
+      renderTitle?.({ style: styles.title, text: title ?? '' }) ||
+      config?.renderTitle?.({ style: styles.title, text: title ?? '' }) ||
+      null
     );
 
     return titleElement ? (
       <View style={titleContainerStyle}>{titleElement}</View>
     ) : null;
-  }, [title, renderTitle, titleContainerStyle]);
+  }, [title, renderTitle, titleContainerStyle, config]);
+
+  const beforeMessageSlotElement = useMemo(() => {
+    return beforeMessageSlot?.() || config?.beforeMessageSlot?.() || null;
+  }, [beforeMessageSlot, config]);
 
   const renderMessageCb = useCallback(() => {
     const messageElement = message ? (
       <Text style={styles.message}>{message}</Text>
     ) : (
-      renderMessage?.({ style: styles.message, text: message ?? '' }) || null
+      renderMessage?.({ style: styles.message, text: message ?? '' }) ||
+      config?.renderMessage?.({ style: styles.message, text: message ?? '' }) ||
+      null
     );
 
     return messageElement ? (
@@ -125,7 +133,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
         {messageElement}
       </ScrollView>
     ) : null;
-  }, [message, renderMessage]);
+  }, [message, renderMessage, config]);
 
   const renderIconCb = useCallback(() => {
     const Svg = icon;
@@ -155,17 +163,26 @@ export const Alert: FC<AlertViewProps> = (props) => {
 
     const dismissButton = isDismissible
       ? renderDismissButton?.({ onPress: onDismissButtonPress }) ||
+        config?.renderDismissButton?.({ onPress: onDismissButtonPress }) ||
         defaultDismissButton
       : null;
 
     return dismissButton;
-  }, [isDismissible, onDismissButtonPress, renderDismissButton]);
+  }, [isDismissible, onDismissButtonPress, renderDismissButton, config]);
 
   const buttonsContainerStyle = useMemo(() => {
     return StyleSheet.compose(styles.buttonsContainer, {
       flexDirection: buttonsDirection,
     });
   }, [buttonsDirection]);
+
+  const beforeButtonsSlotElement = useMemo(() => {
+    return beforeButtonsSlot?.() || config?.beforeButtonsSlot?.() || null;
+  }, [beforeButtonsSlot, config]);
+
+  const afterButtonsSlotElement = useMemo(() => {
+    return afterButtonsSlot?.() || config?.afterButtonsSlot?.() || null;
+  }, [afterButtonsSlot, config]);
 
   const renderButtons = useCallback(() => {
     if (buttons?.length) {
@@ -190,12 +207,12 @@ export const Alert: FC<AlertViewProps> = (props) => {
       {renderIconCb()}
       {beforeTitleSlotElement}
       {renderTitleCb()}
-      {beforeMessageSlot?.() || null}
+      {beforeMessageSlotElement}
       {renderMessageCb()}
-      {beforeButtonsSlot?.() || null}
+      {beforeButtonsSlotElement}
       {renderDismissButtonCb()}
       {renderButtons()}
-      {afterButtonsSlot?.() || null}
+      {afterButtonsSlotElement}
     </Animated.View>
   );
 };

@@ -48,4 +48,11 @@ export type AlertConfig = {
     size?: number;
     color?: ColorValue;
   };
+  renderTitle?: AlertViewProps['renderTitle'];
+  renderMessage?: AlertViewProps['renderMessage'];
+  renderDismissButton?: AlertViewProps['renderDismissButton'];
+  afterButtonsSlot?: AlertViewProps['afterButtonsSlot'];
+  beforeButtonsSlot?: AlertViewProps['beforeButtonsSlot'];
+  beforeMessageSlot?: AlertViewProps['beforeMessageSlot'];
+  beforeTitleSlot?: AlertViewProps['beforeTitleSlot'];
 };
