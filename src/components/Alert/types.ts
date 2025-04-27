@@ -66,6 +66,7 @@ export type AlertButton<R = unknown> = {
 
 export type ConfirmProps = Omit<Props, 'buttons'> & {
   buttons?: string[];
+  hideAlertOnButtonPress?: boolean;
 };
 
 export type AlertViewProps<R = unknown> = Props<R> & {

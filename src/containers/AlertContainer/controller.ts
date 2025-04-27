@@ -62,18 +62,36 @@ export const useController = ({ animationDuration, config }: Props) => {
   );
 
   const update = useCallback(
-    (alert: AlertProps = {}) => {
+    (id: string, alert: AlertProps = {}) => {
       if (!isShownRef.current) {
         return;
       }
 
-      alert = processAlertProps(alert);
+      const isCurrentAlert = currentAlert?.id === id;
 
-      onBeforeUpdate();
+      if (isCurrentAlert) {
+        alert = processAlertProps(alert);
 
-      setCurrentAlert((prev) => ({ ...alert, resolve: prev!.resolve, config }));
+        onBeforeUpdate();
+
+        setCurrentAlert((prev) => ({
+          ...alert,
+          resolve: prev!.resolve,
+          config,
+        }));
+      } else {
+        const alertIndex = queue.current.findIndex((a) => a.id === id);
+
+        if (alertIndex >= 0) {
+          queue.current.splice(alertIndex, 1, {
+            ...alert,
+            resolve: queue.current[alertIndex]!.resolve,
+            config,
+          });
+        }
+      }
     },
-    [onBeforeUpdate, config]
+    [currentAlert?.id, onBeforeUpdate, config]
   );
 
   useEffect(() => {
@@ -134,7 +152,12 @@ export const useController = ({ animationDuration, config }: Props) => {
     [hide]
   );
 
-  const getAlert = useCallback(() => currentAlert, [currentAlert]);
+  const getAlertData = useCallback(
+    (id: string) => {
+      return [currentAlert, ...queue.current].find((a) => a?.id === id);
+    },
+    [currentAlert]
+  );
 
   const confirm = useCallback(
     (alert?: ConfirmProps) => {
@@ -144,32 +167,38 @@ export const useController = ({ animationDuration, config }: Props) => {
 
       const passedButtons = alert?.buttons || confirmConfig?.buttons;
 
+      const hideAlertOnPress = alert?.hideAlertOnButtonPress ?? true;
+
       let buttons: Required<AlertProps<boolean>>['buttons'] = [
         {
           text: 'Yes',
           onAwaitablePress: (resolve) => resolve(true),
+          hideAlertOnPress,
         },
         {
           text: 'No',
           onAwaitablePress: (resolve) => resolve(false),
+          hideAlertOnPress,
         },
       ];
 
-      if (passedButtons?.length !== 2) {
+      if (passedButtons && passedButtons.length !== 2) {
         // eslint-disable-next-line no-console
         console.warn(
           `[React Native Alert Queue] Confirm props must have 2 buttons, got ${passedButtons?.length}`,
           alert
         );
-      } else {
+      } else if (passedButtons) {
         buttons = [
           {
             text: passedButtons[0]!,
             onAwaitablePress: (resolve) => resolve(true),
+            hideAlertOnPress,
           },
           {
             text: passedButtons[1]!,
             onAwaitablePress: (resolve) => resolve(false),
+            hideAlertOnPress,
           },
         ];
       }
@@ -223,7 +252,7 @@ export const useController = ({ animationDuration, config }: Props) => {
     clearQueue,
     confirm,
     currentAlert,
-    getAlert,
+    getAlertData,
     hide,
     isHiding,
     isShown,

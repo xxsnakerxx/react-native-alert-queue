@@ -3,18 +3,19 @@ import type {
   AlertButton,
   Props as AlertProps,
   AlertViewProps as AlertViewProps,
+  ConfirmProps,
 } from '../../components/Alert/types';
 
 export type Alert = {
   clearQueue: (hideDisplayedAlert?: boolean) => void;
-  confirm: (alert?: AlertProps) => Promise<boolean>;
+  confirm: (alert?: ConfirmProps) => Promise<boolean>;
   error: <R = unknown>(error: Error, isFixable?: boolean) => Promise<R>;
-  getAlert: <R = unknown>(id?: string) => AlertProps<R> | undefined;
+  getAlertData: <R = unknown>(id: string) => AlertProps<R> | undefined;
   hide: () => void;
   isShown: boolean;
   show: <R = unknown>(alert: AlertProps<R>) => Promise<R>;
   success: <R = unknown>(alert: AlertProps<R>) => Promise<R>;
-  update: <R = unknown>(alert: AlertProps<R>) => void;
+  update: <R = unknown>(id: string, alert: AlertProps<R>) => void;
 };
 
 export type CurrentAlert = AlertProps &

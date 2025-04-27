@@ -4,7 +4,7 @@ export const alert: Alert = {
   clearQueue: () => {},
   confirm: () => Promise.resolve(true),
   error: <R>() => Promise.resolve<R>(undefined as R),
-  getAlert: () => undefined,
+  getAlertData: () => undefined,
   hide: () => {},
   isShown: false,
   show: <R>() => Promise.resolve<R>(undefined as R),

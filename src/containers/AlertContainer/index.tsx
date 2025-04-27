@@ -16,7 +16,7 @@ export const AlertContainer: FC<Props> = ({
     clearQueue,
     confirm,
     currentAlert,
-    getAlert,
+    getAlertData,
     hide,
     isHiding,
     isShown,
@@ -35,7 +35,7 @@ export const AlertContainer: FC<Props> = ({
     alert.update = update;
     alert.clearQueue = clearQueue;
     // @ts-ignore: Type 'unknown' is not assignable to type 'R'
-    alert.getAlert = getAlert;
+    alert.getAlertData = getAlertData;
     // @ts-ignore: Type 'unknown' is not assignable to type 'R'
     alert.confirm = confirm;
     // @ts-ignore: Type 'unknown' is not assignable to type 'R'
@@ -47,7 +47,7 @@ export const AlertContainer: FC<Props> = ({
     show,
     success,
     update,
-    getAlert,
+    getAlertData,
     isShown,
     confirm,
     showError,
