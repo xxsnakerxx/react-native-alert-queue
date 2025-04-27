@@ -40,4 +40,8 @@ export type AlertConfig = {
   > & {
     buttons?: string[];
   };
+  defaultButton?: {
+    text: string;
+    testID?: string;
+  };
 };

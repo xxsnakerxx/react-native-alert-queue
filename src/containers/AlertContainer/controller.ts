@@ -41,7 +41,7 @@ export const useController = ({ animationDuration, config }: Props) => {
           return;
         }
 
-        alert = processAlertProps(alert);
+        alert = processAlertProps(alert, config);
 
         if (isShownRef.current) {
           queue.current.push({ ...alert, resolve, config });
