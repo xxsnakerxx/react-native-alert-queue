@@ -79,6 +79,5 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     marginHorizontal: 20,
     marginBottom: 20,
-    gap: 10,
   },
 });

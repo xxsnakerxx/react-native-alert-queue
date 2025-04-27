@@ -117,6 +117,29 @@ export const Customizations = () => {
         }
         text="Custom dismiss button"
       />
+      <Button
+        onPress={() =>
+          alert.show({
+            title: 'Custom buttons',
+            buttons: [
+              {
+                text: 'Button 1',
+                onPress: () => alert.success({ message: 'Button 1 pressed' }),
+              },
+              {
+                text: 'Button 2',
+                onPress: () => alert.success({ message: 'Button 2 pressed' }),
+              },
+              {
+                text: 'Button 3',
+                onPress: () => alert.success({ message: 'Button 3 pressed' }),
+              },
+            ],
+            renderButton: CustomButton,
+          })
+        }
+        text="Custom buttons"
+      />
     </Section>
   );
 };
@@ -135,6 +158,29 @@ const Slot = ({
   );
 };
 
+const CustomButton = ({
+  text,
+  onPress,
+  disabled,
+  testID,
+}: {
+  text: string;
+  onPress: () => void;
+  disabled?: boolean;
+  testID?: string;
+}) => {
+  return (
+    <Pressable
+      onPress={onPress}
+      style={styles.button}
+      disabled={disabled}
+      testID={testID}
+    >
+      <Text style={styles.buttonText}>{text}</Text>
+    </Pressable>
+  );
+};
+
 const styles = StyleSheet.create({
   slot: {
     backgroundColor: 'black',
@@ -144,5 +190,16 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  button: {
+    backgroundColor: 'black',
+    padding: 10,
+    borderRadius: 999,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });

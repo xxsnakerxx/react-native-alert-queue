@@ -7,8 +7,8 @@ export const processAlertProps = (props: AlertProps, config?: AlertConfig) => {
   const shouldAppendOkButton = !result.buttons || !result.buttons?.length;
 
   if (shouldAppendOkButton) {
-    result.buttons = config?.defaultButton
-      ? [config.defaultButton]
+    result.buttons = config?.buttons?.default
+      ? [config.buttons.default]
       : [
           {
             text: 'OK',

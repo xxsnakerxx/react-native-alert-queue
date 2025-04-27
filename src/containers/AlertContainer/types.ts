@@ -1,5 +1,6 @@
 import type { ColorValue } from 'react-native';
 import type {
+  AlertButton,
   Props as AlertProps,
   AlertViewProps as AlertViewProps,
 } from '../../components/Alert/types';
@@ -28,6 +29,7 @@ export type Props = {
 };
 
 export type AlertConfig = {
+  testID?: string;
   backdropBackgroundColor?: ColorValue;
   success?: Partial<
     Pick<AlertProps, 'icon' | 'iconColor' | 'iconSize' | 'title'>
@@ -40,10 +42,6 @@ export type AlertConfig = {
   > & {
     buttons?: string[];
   };
-  defaultButton?: {
-    text: string;
-    testID?: string;
-  };
   icon?: {
     size?: number;
     color?: ColorValue;
@@ -55,4 +53,9 @@ export type AlertConfig = {
   beforeButtonsSlot?: AlertViewProps['beforeButtonsSlot'];
   beforeMessageSlot?: AlertViewProps['beforeMessageSlot'];
   beforeTitleSlot?: AlertViewProps['beforeTitleSlot'];
+  buttons?: {
+    gap?: number;
+    render?: AlertViewProps['renderButton'];
+    default?: Pick<AlertButton, 'text' | 'testID'>;
+  };
 };

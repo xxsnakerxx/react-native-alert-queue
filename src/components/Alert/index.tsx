@@ -1,4 +1,4 @@
-import { type FC, useCallback, useMemo } from 'react';
+import { type FC, Fragment, useCallback, useMemo } from 'react';
 import {
   Animated,
   Pressable,
@@ -35,6 +35,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
     testID,
     buttons,
     buttonsDirection = 'column',
+    renderButton,
     title,
     renderTitle,
     message,
@@ -173,8 +174,9 @@ export const Alert: FC<AlertViewProps> = (props) => {
   const buttonsContainerStyle = useMemo(() => {
     return StyleSheet.compose(styles.buttonsContainer, {
       flexDirection: buttonsDirection,
+      gap: config?.buttons?.gap || 10,
     });
-  }, [buttonsDirection]);
+  }, [buttonsDirection, config]);
 
   const beforeButtonsSlotElement = useMemo(() => {
     return beforeButtonsSlot?.() || config?.beforeButtonsSlot?.() || null;
@@ -188,23 +190,44 @@ export const Alert: FC<AlertViewProps> = (props) => {
     if (buttons?.length) {
       return (
         <View style={buttonsContainerStyle}>
-          {buttons.map((button) => (
-            <Button
-              key={button.text}
-              text={button.text}
-              onPress={() => onButtonPress(button)}
-              disabled={button.disabled}
-            />
-          ))}
+          {buttons.map((button, i) => {
+            const renderFn = renderButton || config?.buttons?.render;
+
+            if (renderFn) {
+              return (
+                <Fragment key={i}>
+                  {renderFn({
+                    text: button.text,
+                    onPress: () => onButtonPress(button),
+                    disabled: button.disabled,
+                    testID: button.testID,
+                  })}
+                </Fragment>
+              );
+            }
+
+            return (
+              <Button
+                key={i}
+                text={button.text}
+                onPress={() => onButtonPress(button)}
+                disabled={button.disabled}
+                testID={button.testID}
+              />
+            );
+          })}
         </View>
       );
     }
 
     return null;
-  }, [buttons, onButtonPress, buttonsContainerStyle]);
+  }, [buttons, onButtonPress, buttonsContainerStyle, renderButton, config]);
 
   return (
-    <Animated.View style={containerStyle} testID={testID || 'Alert'}>
+    <Animated.View
+      style={containerStyle}
+      testID={testID || config?.testID || 'Alert'}
+    >
       {renderIconCb()}
       {beforeTitleSlotElement}
       {renderTitleCb()}

@@ -44,6 +44,11 @@ export interface Props<R = unknown> {
   }) => ReactElement<any>;
   buttons?: AlertButton[];
   buttonsDirection?: 'row' | 'column';
+  renderButton?: (
+    props: Pick<AlertButton, 'text' | 'testID' | 'disabled'> & {
+      onPress: () => void;
+    }
+  ) => ReactElement<any>;
   title?: string;
 }
 
