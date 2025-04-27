@@ -30,12 +30,10 @@ export default defineConfig([
           useTabs: false,
         },
       ],
+      'no-console': 'error',
     },
   },
   {
-    ignores: [
-      'node_modules/',
-      'lib/'
-    ],
+    ignores: ['node_modules/', 'lib/'],
   },
 ]);
