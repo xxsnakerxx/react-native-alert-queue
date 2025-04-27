@@ -4,13 +4,20 @@ export const Button = ({
   onPress,
   text,
   testID,
+  disabled,
 }: {
   onPress?: () => void;
   text: string;
   testID?: string;
+  disabled?: boolean;
 }) => {
   return (
-    <Pressable style={styles.button} onPress={onPress} testID={testID}>
+    <Pressable
+      style={styles.button}
+      onPress={onPress}
+      testID={testID}
+      disabled={disabled}
+    >
       <Text style={styles.buttonText}>{text}</Text>
     </Pressable>
   );

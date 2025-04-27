@@ -184,7 +184,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
     return afterButtonsSlot?.() || config?.afterButtonsSlot?.() || null;
   }, [afterButtonsSlot, config]);
 
-  const renderButtons = useCallback(() => {
+  const renderButtonsCb = useCallback(() => {
     if (buttons?.length) {
       return (
         <View style={buttonsContainerStyle}>
@@ -193,6 +193,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
               key={button.text}
               text={button.text}
               onPress={() => onButtonPress(button)}
+              disabled={button.disabled}
             />
           ))}
         </View>
@@ -211,7 +212,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
       {renderMessageCb()}
       {beforeButtonsSlotElement}
       {renderDismissButtonCb()}
-      {renderButtons()}
+      {renderButtonsCb()}
       {afterButtonsSlotElement}
     </Animated.View>
   );
