@@ -2,6 +2,13 @@
 
 A fully customizable alert system for React Native with promise-based API and queue support
 
+## Demo
+
+
+https://github.com/user-attachments/assets/aeb9a635-9ac5-451f-9005-96cdd6ad2361
+
+
+
 ## Installation
 
 ```sh
