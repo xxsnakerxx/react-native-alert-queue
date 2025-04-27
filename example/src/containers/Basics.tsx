@@ -15,6 +15,18 @@ export const Basics = () => {
         text="Show Alert"
       />
       <Button
+        onPress={() =>
+          alert.show({
+            title: 'Hello',
+            message:
+              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'.repeat(
+                20
+              ),
+          })
+        }
+        text="Show Alert with long message"
+      />
+      <Button
         onPress={() => {
           alert.show({
             title: 'Alert 1',

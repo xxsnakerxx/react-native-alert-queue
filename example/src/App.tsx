@@ -12,7 +12,7 @@ export default function App() {
       <View style={styles.container}>
         <SafeAreaView style={styles.wrapper}>
           <Text style={styles.title}>React Native Alert Queue</Text>
-          <ScrollView style={styles.scrollView}>
+          <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <Basics />
             <Customizations />
           </ScrollView>
@@ -30,8 +30,9 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
   },
-  scrollView: {
+  scrollViewContent: {
     paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   title: {
     fontSize: 26,

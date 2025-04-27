@@ -5,6 +5,7 @@ import { alert } from 'react-native-alert-queue';
 import { Button } from '../components/Button';
 import { Section } from '../components/Section';
 import {
+  Pressable,
   StyleSheet,
   Text,
   View,
@@ -50,6 +51,71 @@ export const Customizations = () => {
           })
         }
         text="Slots"
+      />
+      <Button
+        onPress={() =>
+          alert.show({
+            renderTitle: ({ style }) => (
+              <Text style={[style, { color: 'red', fontSize: 28 }]}>
+                Custom title
+              </Text>
+            ),
+          })
+        }
+        text="Custom title"
+      />
+      <Button
+        onPress={() =>
+          alert.show({
+            title: 'Custom message',
+            renderMessage: ({ style }) => (
+              <Text
+                style={[
+                  style,
+                  {
+                    color: 'red',
+                    fontSize: 28,
+                    lineHeight: 32,
+                    textAlign: 'left',
+                  },
+                ]}
+              >
+                {'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'.repeat(
+                  20
+                )}
+              </Text>
+            ),
+          })
+        }
+        text="Custom message"
+      />
+      <Button
+        onPress={() =>
+          alert.show({
+            title: 'Custom icon',
+            icon: DangerIcon,
+            iconColor: 'red',
+            iconSize: 150,
+          })
+        }
+        text="Custom icon"
+      />
+      <Button
+        onPress={() =>
+          alert.show({
+            title: 'Custom dismiss button',
+            isDismissible: true,
+            renderDismissButton: ({ onPress }) => (
+              <Pressable
+                onPress={onPress}
+                style={{ position: 'absolute', right: 16, top: 16 }}
+              >
+                <Text style={{ color: 'red', fontSize: 16 }}>❌</Text>
+              </Pressable>
+            ),
+          })
+        }
+        text="Custom dismiss button"
       />
     </Section>
   );
