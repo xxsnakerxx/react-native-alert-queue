@@ -138,9 +138,11 @@ export const useController = ({ animationDuration, config }: Props) => {
 
   const confirm = useCallback(
     (alert?: ConfirmProps) => {
-      const title = alert?.title || 'Are you sure?';
+      const { confirm: confirmConfig } = config || {};
 
-      const passedButtons = alert?.buttons;
+      const title = alert?.title || confirmConfig?.title || 'Are you sure?';
+
+      const passedButtons = alert?.buttons || confirmConfig?.buttons;
 
       let buttons: Required<AlertProps<boolean>>['buttons'] = [
         {
@@ -172,6 +174,9 @@ export const useController = ({ animationDuration, config }: Props) => {
       }
 
       return show({
+        icon: confirmConfig?.icon,
+        iconColor: confirmConfig?.iconColor,
+        iconSize: confirmConfig?.iconSize,
         ...alert,
         buttons,
         buttonsDirection: 'row',
@@ -179,7 +184,7 @@ export const useController = ({ animationDuration, config }: Props) => {
       });
     },
 
-    [show]
+    [show, config]
   );
 
   const showError = useCallback(
@@ -200,6 +205,7 @@ export const useController = ({ animationDuration, config }: Props) => {
   const success = useCallback(
     (alert?: AlertProps) => {
       const { success: successConfig } = config || {};
+
       show({
         icon: successConfig?.icon ?? SuccessIcon,
         iconColor: successConfig?.iconColor ?? 'green',

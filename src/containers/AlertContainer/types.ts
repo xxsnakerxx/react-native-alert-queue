@@ -35,4 +35,9 @@ export type AlertConfig = {
   error?: Partial<
     Pick<AlertProps, 'icon' | 'iconColor' | 'iconSize' | 'title'>
   >;
+  confirm?: Partial<
+    Pick<AlertProps, 'icon' | 'iconColor' | 'iconSize' | 'title'>
+  > & {
+    buttons?: string[];
+  };
 };
