@@ -156,6 +156,7 @@ export const useController = ({ animationDuration, config }: Props) => {
       ];
 
       if (passedButtons?.length !== 2) {
+        // eslint-disable-next-line no-console
         console.warn(
           `[React Native Alert Queue] Confirm props must have 2 buttons, got ${passedButtons?.length}`,
           alert

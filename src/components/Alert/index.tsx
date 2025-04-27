@@ -28,7 +28,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
     beforeTitleSlot,
     renderDismissButton,
     icon,
-    iconColor = 'black',
+    iconColor,
     iconSize,
     isDismissible,
     isHiding,
@@ -39,6 +39,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
     renderTitle,
     message,
     renderMessage,
+    config,
   } = props;
 
   const { animation } = useAnimation({
@@ -129,12 +130,21 @@ export const Alert: FC<AlertViewProps> = (props) => {
   const renderIconCb = useCallback(() => {
     const Svg = icon;
 
+    const iconConfig = config?.icon;
+
+    const defaultIconSize = iconSize || iconConfig?.size || 72;
+    const defaultIconColor = iconColor || iconConfig?.color || 'black';
+
     return Svg ? (
       <View style={styles.iconContainer}>
-        <Svg fill={iconColor} width={iconSize} height={iconSize} />
+        <Svg
+          fill={defaultIconColor}
+          width={defaultIconSize}
+          height={defaultIconSize}
+        />
       </View>
     ) : null;
-  }, [icon, iconColor, iconSize]);
+  }, [icon, iconColor, iconSize, config]);
 
   const renderDismissButtonCb = useCallback(() => {
     const defaultDismissButton = (

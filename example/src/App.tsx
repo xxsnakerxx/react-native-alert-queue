@@ -4,6 +4,7 @@ import { AlertContainer } from 'react-native-alert-queue';
 
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { Basics } from './containers/Basics';
+import { Customizations } from './containers/Customizations';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
           <Text style={styles.title}>React Native Alert Queue</Text>
           <ScrollView style={styles.scrollView}>
             <Basics />
+            <Customizations />
           </ScrollView>
         </SafeAreaView>
         <AlertContainer />

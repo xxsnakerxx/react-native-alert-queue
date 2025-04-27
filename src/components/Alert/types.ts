@@ -1,5 +1,6 @@
 import type { ReactElement, FC } from 'react';
 import type { ColorValue, StyleProp, TextStyle } from 'react-native';
+import type { AlertConfig } from '../../containers/AlertContainer/types';
 
 type IconProps = {
   fill?: ColorValue;
@@ -62,4 +63,5 @@ export type AlertViewProps<R = unknown> = Props<R> & {
   animationDuration: number;
   isHiding: boolean;
   resolve: (value?: R) => void;
+  config?: AlertConfig;
 };

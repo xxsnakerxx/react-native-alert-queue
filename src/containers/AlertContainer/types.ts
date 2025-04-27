@@ -44,4 +44,8 @@ export type AlertConfig = {
     text: string;
     testID?: string;
   };
+  icon?: {
+    size?: number;
+    color?: ColorValue;
+  };
 };
