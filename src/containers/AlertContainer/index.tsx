@@ -7,7 +7,10 @@ import { Alert } from '../../components/Alert';
 import { StyleSheet, View } from 'react-native';
 import { styles } from './styles';
 
-export const AlertContainer: FC<Props> = ({ animationDuration = 200 }) => {
+export const AlertContainer: FC<Props> = ({
+  animationDuration = 200,
+  config,
+}) => {
   const {
     bottomOffset,
     clearQueue,
@@ -21,7 +24,7 @@ export const AlertContainer: FC<Props> = ({ animationDuration = 200 }) => {
     showError,
     success,
     update,
-  } = useController({ animationDuration });
+  } = useController({ animationDuration, config });
 
   useEffect(() => {
     // @ts-ignore: Type 'unknown' is not assignable to type 'R'
@@ -58,11 +61,13 @@ export const AlertContainer: FC<Props> = ({ animationDuration = 200 }) => {
     [bottomOffset]
   );
 
-  console.log('currentAlert', currentAlert);
-
   return currentAlert ? (
     <View style={containerStyle}>
-      <Backdrop animationDuration={animationDuration} isHiding={isHiding} />
+      <Backdrop
+        animationDuration={animationDuration}
+        isHiding={isHiding}
+        backgroundColor={config?.backdropBackgroundColor}
+      />
       <Alert
         {...currentAlert}
         animationDuration={animationDuration}

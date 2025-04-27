@@ -1,3 +1,4 @@
+import type { ColorValue } from 'react-native';
 import type {
   Props as AlertProps,
   AlertViewProps as AlertViewProps,
@@ -21,4 +22,9 @@ export type { AlertProps };
 
 export type Props = {
   animationDuration?: number;
+  config?: AlertConfig;
+};
+
+export type AlertConfig = {
+  backdropBackgroundColor?: ColorValue;
 };
