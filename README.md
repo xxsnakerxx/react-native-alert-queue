@@ -2,12 +2,18 @@
 
 A fully customizable alert system for React Native with promise-based API and queue support
 
+[![npm version](https://img.shields.io/npm/v/react-native-alert-queue?style=flat-square)](https://www.npmjs.com/package/react-native-alert-queue)
+[![npm downloads](https://img.shields.io/npm/dm/react-native-alert-queue?style=flat-square)](https://www.npmjs.com/package/react-native-alert-queue)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/xxsnakerxx?style=flat-square)](https://github.com/sponsors/xxsnakerxx)
+
+![Made with Love](https://img.shields.io/badge/Made%20with-%E2%9D%A4-red?style=flat-square)
+[![Built with create-react-native-library](https://img.shields.io/badge/built%20with-create--react--native--library-9cf?style=flat-square)](https://github.com/callstack/react-native-builder-bob)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
 ## Demo
 
-
 https://github.com/user-attachments/assets/aeb9a635-9ac5-451f-9005-96cdd6ad2361
-
-
 
 ## Installation
 
