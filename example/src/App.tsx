@@ -6,6 +6,8 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { Basics } from './containers/Basics';
 import { Customizations } from './containers/Customizations';
 import { Updating } from './containers/Updating';
+import { KeyboardAvoiding } from './containers/Keyboard';
+
 export default function App() {
   return (
     <SafeAreaProvider>
@@ -16,6 +18,7 @@ export default function App() {
             <Basics />
             <Customizations />
             <Updating />
+            <KeyboardAvoiding />
           </ScrollView>
         </SafeAreaView>
         <AlertContainer />
