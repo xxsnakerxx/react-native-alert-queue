@@ -13,12 +13,20 @@ export const Button = ({
 }) => {
   return (
     <Pressable
-      style={styles.button}
+      style={StyleSheet.compose(styles.button, {
+        opacity: disabled ? 0.5 : 1,
+      })}
       onPress={onPress}
       testID={testID}
       disabled={disabled}
     >
-      <Text style={styles.buttonText}>{text}</Text>
+      <Text
+        style={StyleSheet.compose(styles.buttonText, {
+          color: disabled ? 'gray' : 'black',
+        })}
+      >
+        {text}
+      </Text>
     </Pressable>
   );
 };
