@@ -20,6 +20,7 @@ A fully customizable alert system for React Native with promise-based API and qu
 - 🖼️ SVG icon support
 - ⚙️ Global styling and behavior configuration
 - ✅ Built-in helpers for success, error, and confirm dialogs
+- 🌐 React Native Web support
 
 ## Demo
 
