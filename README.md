@@ -11,6 +11,15 @@ A fully customizable alert system for React Native with promise-based API and qu
 [![Built with create-react-native-library](https://img.shields.io/badge/built%20with-create--react--native--library-9cf?style=flat-square)](https://github.com/callstack/react-native-builder-bob)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
+## Key Features
+
+- ⚡ Easy `async/await` usage (`await alert.show()`)
+- ⏳ Sequential alert queue management
+- 🎨 Full UI customization with slots and custom renderers
+- 🖼️ SVG icon support
+- ⚙️ Global styling and behavior configuration
+- ✅ Built-in helpers for success, error, and confirm dialogs
+
 ## Demo
 
 https://github.com/user-attachments/assets/aeb9a635-9ac5-451f-9005-96cdd6ad2361
