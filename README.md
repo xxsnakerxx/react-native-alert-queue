@@ -435,7 +435,10 @@ type AlertConfig = {
     // Default title for confirm dialogs
     title?: string;
     // Default button texts for confirm dialogs
-    buttons?: string[];
+    buttons?: {
+      text: string;
+      customProps?: AlertButtonCustomProps;
+    }[];
   };
 
   // Global icon configuration
