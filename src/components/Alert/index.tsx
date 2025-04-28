@@ -1,4 +1,10 @@
-import { type FC, Fragment, useCallback, useMemo } from 'react';
+import {
+  type FC,
+  Fragment,
+  type ReactElement,
+  useCallback,
+  useMemo,
+} from 'react';
 import {
   Animated,
   Pressable,
@@ -101,15 +107,19 @@ export const Alert: FC<AlertViewProps> = (props) => {
   }, [isDismissible, icon, beforeTitleSlotElement]);
 
   const renderTitleCb = useCallback(() => {
-    const titleElement = title ? (
-      <Text numberOfLines={4} style={styles.title}>
-        {title}
-      </Text>
-    ) : (
-      renderTitle?.({ style: styles.title, text: title ?? '' }) ||
-      config?.renderTitle?.({ style: styles.title, text: title ?? '' }) ||
-      null
-    );
+    const renderTitleFn = renderTitle || config?.renderTitle;
+
+    let titleElement: ReactElement<any> | null = null;
+
+    if (renderTitleFn) {
+      titleElement = renderTitleFn({ style: styles.title, text: title ?? '' });
+    } else if (title) {
+      titleElement = (
+        <Text numberOfLines={4} style={styles.title}>
+          {title}
+        </Text>
+      );
+    }
 
     return titleElement ? (
       <View style={titleContainerStyle}>{titleElement}</View>
@@ -121,13 +131,18 @@ export const Alert: FC<AlertViewProps> = (props) => {
   }, [beforeMessageSlot, config]);
 
   const renderMessageCb = useCallback(() => {
-    const messageElement = message ? (
-      <Text style={styles.message}>{message}</Text>
-    ) : (
-      renderMessage?.({ style: styles.message, text: message ?? '' }) ||
-      config?.renderMessage?.({ style: styles.message, text: message ?? '' }) ||
-      null
-    );
+    const renderMessageFn = renderMessage || config?.renderMessage;
+
+    let messageElement: ReactElement<any> | null = null;
+
+    if (renderMessageFn) {
+      messageElement = renderMessageFn({
+        style: styles.message,
+        text: message ?? '',
+      });
+    } else if (message) {
+      messageElement = <Text style={styles.message}>{message}</Text>;
+    }
 
     return messageElement ? (
       <ScrollView bounces={false} style={styles.messageContainer}>
