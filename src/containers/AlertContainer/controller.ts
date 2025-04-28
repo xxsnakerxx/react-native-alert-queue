@@ -189,16 +189,20 @@ export const useController = ({ animationDuration, config }: Props) => {
           alert
         );
       } else if (passedButtons) {
+        const [resolveButton, rejectButton] = passedButtons;
+
         buttons = [
           {
-            text: passedButtons[0]!,
+            text: resolveButton!.text,
             onAwaitablePress: (resolve) => resolve(true),
             hideAlertOnPress,
+            customProps: resolveButton!.customProps,
           },
           {
-            text: passedButtons[1]!,
+            text: rejectButton!.text,
             onAwaitablePress: (resolve) => resolve(false),
             hideAlertOnPress,
+            customProps: rejectButton!.customProps,
           },
         ];
       }

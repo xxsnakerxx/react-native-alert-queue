@@ -65,7 +65,7 @@ export type AlertButton<R = unknown> = {
 };
 
 export type ConfirmProps = Omit<Props, 'buttons'> & {
-  buttons?: string[];
+  buttons?: Pick<AlertButton, 'text' | 'customProps'>[];
   hideAlertOnButtonPress?: boolean;
 };
 

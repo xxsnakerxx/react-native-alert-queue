@@ -147,6 +147,35 @@ export const Customizations = () => {
         }
         text="Custom buttons"
       />
+      <Button
+        onPress={async () => {
+          const result = await alert.confirm({
+            title: 'Custom confirm buttons',
+            buttons: [
+              {
+                text: 'Ok',
+                customProps: {
+                  scheme: 'primary',
+                },
+              },
+              {
+                text: 'Cancel',
+                customProps: {
+                  scheme: 'secondary',
+                },
+              },
+            ],
+            renderButton: CustomButton,
+          });
+
+          if (result) {
+            alert.success({ message: 'Ok pressed' });
+          } else {
+            alert.error(new Error('Cancel pressed'));
+          }
+        }}
+        text="Custom confirm buttons"
+      />
     </Section>
   );
 };

@@ -41,7 +41,7 @@ export type AlertConfig = {
   confirm?: Partial<
     Pick<AlertProps, 'icon' | 'iconColor' | 'iconSize' | 'title'>
   > & {
-    buttons?: string[];
+    buttons?: Pick<AlertButton, 'text' | 'customProps'>[];
   };
   icon?: {
     size?: number;
