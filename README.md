@@ -120,6 +120,50 @@ const result = await alert.confirm({
 
 ### Advanced Features
 
+#### Custom Helper Functions
+
+You can create your own helper functions to simplify common alert patterns in your app:
+
+```tsx
+const transactionCompletedAlert = (amount: string) =>
+  alert.show({
+    title: 'Transaction Complete',
+    message: `Successfully transferred ${amount}`,
+    icon: SuccessIcon,
+    buttons: [
+      {
+        text: 'View Details',
+        onPress: () => navigateToTransactionDetails(),
+      },
+      {
+        text: 'Done',
+      },
+    ],
+  });
+
+// Create a custom error alert for network issues
+const networkErrorAlert = (retryCallback: () => void) =>
+  alert.show({
+    title: 'Network Error',
+    message: 'Network connection lost',
+    icon: NetworkErrorIcon,
+    buttons: [
+      {
+        text: 'Retry',
+        onPress: retryCallback,
+      },
+      {
+        text: 'Cancel',
+      },
+    ],
+  });
+
+// Usage
+await transactionCompletedAlert('$100.00');
+
+networkErrorAlert(() => fetchData());
+```
+
 #### Custom Rendering
 
 ```tsx
