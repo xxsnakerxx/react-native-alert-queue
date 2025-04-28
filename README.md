@@ -15,6 +15,7 @@ A fully customizable alert system for React Native with promise-based API and qu
 
 - ⚡ Easy `async/await` usage (`await alert.show()`)
 - ⏳ Sequential alert queue management
+- 🛠️ Realtime UI update: dynamically update alert title, message, buttons, and more
 - 🎨 Full UI customization with slots and custom renderers
 - 🖼️ SVG icon support
 - ⚙️ Global styling and behavior configuration
