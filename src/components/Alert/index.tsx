@@ -6,7 +6,6 @@ import {
   useMemo,
 } from 'react';
 import {
-  Animated,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -14,7 +13,14 @@ import {
   View,
   type StyleProp,
   type ViewStyle,
+  Platform,
 } from 'react-native';
+
+import Animated, {
+  useAnimatedStyle,
+  interpolate,
+  CurvedTransition,
+} from 'react-native-reanimated';
 
 import type { AlertViewProps } from './types';
 
@@ -22,8 +28,9 @@ import { CloseIcon } from '../../components/icons/Close';
 
 import { useAnimation } from '../../hooks/useAnimation';
 import { useController } from './controller';
-import { styles, useContainerDimensions } from './styles';
+import { styles } from './styles';
 import { Button } from '../Button';
+import { useContainerDimensions } from './hooks/useContainerDimensions';
 
 export const Alert: FC<AlertViewProps> = (props) => {
   const {
@@ -58,38 +65,23 @@ export const Alert: FC<AlertViewProps> = (props) => {
 
   const containerDimensions = useContainerDimensions();
 
-  const containerAnimation = useMemo(
-    () => ({
-      opacity: animation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 1],
-      }),
+  const containerAnimation = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(animation.value, [0, 1], [0, 1]),
       transform: [
         {
-          scaleX: animation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0.8, 1],
-          }),
+          scaleX: interpolate(animation.value, [0, 1], [0.8, 1]),
         },
         {
-          scaleY: animation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0.8, 1],
-          }),
+          scaleY: interpolate(animation.value, [0, 1], [0.8, 1]),
         },
       ],
-    }),
-    [animation]
-  );
+    };
+  });
 
   const containerStyle = useMemo(
-    () =>
-      StyleSheet.flatten([
-        styles.container,
-        containerDimensions,
-        containerAnimation,
-      ]),
-    [containerAnimation, containerDimensions]
+    () => StyleSheet.flatten([styles.container, containerDimensions]),
+    [containerDimensions]
   );
 
   const beforeTitleSlotElement = useMemo(() => {
@@ -239,20 +231,26 @@ export const Alert: FC<AlertViewProps> = (props) => {
     return null;
   }, [buttons, onButtonPress, buttonsContainerStyle, renderButton, config]);
 
+  const layoutAnimation = useMemo(() => {
+    return Platform.select({
+      web: undefined,
+      default: CurvedTransition,
+    });
+  }, []);
+
   return (
-    <Animated.View
-      style={containerStyle}
-      testID={testID || config?.testID || 'Alert'}
-    >
-      {renderIconCb()}
-      {beforeTitleSlotElement}
-      {renderTitleCb()}
-      {beforeMessageSlotElement}
-      {renderMessageCb()}
-      {beforeButtonsSlotElement}
-      {renderDismissButtonCb()}
-      {renderButtonsCb()}
-      {afterButtonsSlotElement}
+    <Animated.View style={containerAnimation} layout={layoutAnimation}>
+      <View style={containerStyle} testID={testID || config?.testID || 'Alert'}>
+        {renderIconCb()}
+        {beforeTitleSlotElement}
+        {renderTitleCb()}
+        {beforeMessageSlotElement}
+        {renderMessageCb()}
+        {beforeButtonsSlotElement}
+        {renderDismissButtonCb()}
+        {renderButtonsCb()}
+        {afterButtonsSlotElement}
+      </View>
     </Animated.View>
   );
 };

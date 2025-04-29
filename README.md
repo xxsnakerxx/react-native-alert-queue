@@ -26,6 +26,13 @@ A fully customizable alert system for React Native with promise-based API and qu
 
 https://github.com/user-attachments/assets/aeb9a635-9ac5-451f-9005-96cdd6ad2361
 
+## Requirements
+
+- `2.x` versions require [`react-native-reanimated 3.x`](https://docs.swmansion.com/react-native-reanimated/).
+- If your project does not use Reanimated, you can use `react-native-alert-queue@1.x`.
+
+Install `RN Reanimated` following [their official guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started#installation).
+
 ## Installation
 
 ```sh

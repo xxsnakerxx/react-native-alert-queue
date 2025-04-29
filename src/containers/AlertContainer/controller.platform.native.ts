@@ -62,10 +62,6 @@ export const usePlatformController = () => {
     }
   }, [onKeyboardDidHide, onKeyboardDidShow]);
 
-  const onBeforeUpdate = useCallback(() => {
-    LayoutAnimation.easeInEaseOut();
-  }, []);
-
   const onHide = useCallback(() => {
     if (focusedTextInput.current) {
       TextInput.State.focusTextInput(focusedTextInput.current);
@@ -83,5 +79,5 @@ export const usePlatformController = () => {
     setKeyboardHeight(0);
   }, []);
 
-  return { bottomOffset: keyboardHeight, onBeforeUpdate, onHide, onShow };
+  return { bottomOffset: keyboardHeight, onHide, onShow };
 };

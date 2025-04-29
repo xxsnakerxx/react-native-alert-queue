@@ -1,9 +1,10 @@
 import { type FC, useMemo } from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import type { Props } from './types';
 
 import { useAnimation } from '../../hooks/useAnimation';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 
 export const Backdrop: FC<Props> = ({
   animationDuration,
@@ -12,16 +13,9 @@ export const Backdrop: FC<Props> = ({
 }) => {
   const { animation } = useAnimation({ animationDuration, isHiding });
 
-  const animatedStyle = useMemo(
-    () => ({
-      opacity: animation.interpolate({
-        extrapolate: 'clamp',
-        inputRange: [0, 1],
-        outputRange: [0, 1],
-      }),
-    }),
-    [animation]
-  );
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: animation.value,
+  }));
 
   const style = useMemo(
     () =>
