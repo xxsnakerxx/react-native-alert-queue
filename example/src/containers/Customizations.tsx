@@ -77,13 +77,13 @@ export const Customizations = () => {
                     color: 'red',
                     fontSize: 28,
                     lineHeight: 32,
-                    textAlign: 'left',
+                    textAlign: 'right',
                   },
                 ]}
               >
-                {'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'.repeat(
-                  20
-                )}
+                {
+                  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
+                }
               </Text>
             ),
           })

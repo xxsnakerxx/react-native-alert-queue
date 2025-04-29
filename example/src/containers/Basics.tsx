@@ -12,7 +12,7 @@ export const Basics = () => {
             message: 'I am an alert',
           })
         }
-        text="Show Alert"
+        text="Simple Alert"
       />
       <Button
         onPress={() =>
@@ -24,7 +24,7 @@ export const Basics = () => {
               ),
           })
         }
-        text="Show Alert with long message"
+        text="Long Message"
       />
       <Button
         onPress={() => {
@@ -53,7 +53,7 @@ export const Basics = () => {
             ],
           });
         }}
-        text="Show 2 Alerts"
+        text="Alerts queue"
       />
       <Button
         onPress={() => {
@@ -61,13 +61,13 @@ export const Basics = () => {
             message: 'I am a success alert',
           });
         }}
-        text="Show Success Alert"
+        text="Success"
       />
       <Button
         onPress={() => {
           alert.error(new Error('I am an error alert'));
         }}
-        text="Show Error Alert"
+        text="Error"
       />
       <Button
         onPress={async () => {
@@ -83,7 +83,7 @@ export const Basics = () => {
             alert.error(new Error('You pressed no'));
           }
         }}
-        text="Show Confirm"
+        text="Confirm"
       />
       <Button
         onPress={async () => {
@@ -108,7 +108,7 @@ export const Basics = () => {
             ],
           });
         }}
-        text="Show Dismissible Alert"
+        text="Dismissible alert"
       />
     </Section>
   );
