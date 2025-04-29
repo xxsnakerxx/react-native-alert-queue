@@ -57,7 +57,7 @@ Dynamically update the alert while it's displayed:
 
 Alerts automatically adjust position when the keyboard appears:
 
-![Keyboard Avoidance Demo](./demo/keyboard-avoiding.gif)
+![Keyboard Avoidance Demo](./demo/keyboard.gif)
 
 ---
 
