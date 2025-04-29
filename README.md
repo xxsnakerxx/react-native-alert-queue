@@ -23,9 +23,51 @@ A fully customizable alert system for React Native with promise-based API and qu
 - 🎉 Confetti support
 - 🌐 React Native Web support
 
-## Demo
+## 📺 Demo
 
-https://github.com/user-attachments/assets/aeb9a635-9ac5-451f-9005-96cdd6ad2361
+See how `react-native-alert-queue` works in action! 🚀
+
+---
+
+### 🛠 Basics
+
+Basic usage:
+
+![Basics Demo](./demo/basics.gif)
+
+---
+
+### 🎨 Customizations
+
+Custom titles, messages, icons, buttons, and slots:
+
+![Customizations Demo](./demo/customizations.gif)
+
+---
+
+### 🔄 Real-Time Updating
+
+Dynamically update the alert while it's displayed:
+
+![Updating Demo](./demo/updating.gif)
+
+---
+
+### 🎹 Keyboard Avoidance
+
+Alerts automatically adjust position when the keyboard appears:
+
+![Keyboard Avoidance Demo](./demo/keyboard-avoiding.gif)
+
+---
+
+### 🎉 Confetti Animation
+
+Celebrate success with built-in confetti effects:
+
+![Confetti Demo](./demo/confetti.gif)
+
+---
 
 ## Requirements
 
