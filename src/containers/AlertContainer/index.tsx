@@ -1,4 +1,4 @@
-import { useEffect, useMemo, type FC } from 'react';
+import { useEffect, useMemo, useCallback, type FC } from 'react';
 import type { Props } from './types';
 import { alert } from './alert.api';
 import { useController } from './controller';
@@ -6,6 +6,7 @@ import { Backdrop } from '../../components/Backdrop';
 import { Alert } from '../../components/Alert';
 import { StyleSheet, View } from 'react-native';
 import { styles } from './styles';
+import { ConfettiContainer } from '../ConfettiContainer';
 
 export const AlertContainer: FC<Props> = ({
   animationDuration = 200,
@@ -61,6 +62,28 @@ export const AlertContainer: FC<Props> = ({
     [bottomOffset]
   );
 
+  const renderConfetti = useCallback(() => {
+    const shouldRender = currentAlert?.confetti;
+
+    if (shouldRender) {
+      const currentAlertConfettiProps =
+        typeof currentAlert.confetti === 'boolean'
+          ? undefined
+          : currentAlert.confetti;
+
+      const globalProps = config?.confetti;
+
+      const confettiProps = {
+        ...globalProps,
+        ...currentAlertConfettiProps,
+      };
+
+      return <ConfettiContainer {...confettiProps} />;
+    }
+
+    return null;
+  }, [currentAlert?.confetti, config?.confetti]);
+
   return currentAlert ? (
     <View style={containerStyle}>
       <Backdrop
@@ -68,6 +91,7 @@ export const AlertContainer: FC<Props> = ({
         isHiding={isHiding}
         backgroundColor={config?.backdropBackgroundColor}
       />
+      {renderConfetti()}
       <Alert
         {...currentAlert}
         animationDuration={animationDuration}

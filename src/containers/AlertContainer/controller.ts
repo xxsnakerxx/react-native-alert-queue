@@ -21,8 +21,7 @@ export const useController = ({ animationDuration, config }: Props) => {
   const hideTimeout = useRef(0);
   const isShownRef = useRef(false);
 
-  const { bottomOffset, onBeforeUpdate, onHide, onShow } =
-    usePlatformController();
+  const { bottomOffset, onHide, onShow } = usePlatformController();
 
   useEffect(() => {
     isMounted.current = true;
@@ -72,8 +71,6 @@ export const useController = ({ animationDuration, config }: Props) => {
       if (isCurrentAlert) {
         alert = processAlertProps(alert);
 
-        onBeforeUpdate();
-
         setCurrentAlert((prev) => ({
           ...alert,
           resolve: prev!.resolve,
@@ -91,7 +88,7 @@ export const useController = ({ animationDuration, config }: Props) => {
         }
       }
     },
-    [currentAlert?.id, onBeforeUpdate, config]
+    [currentAlert?.id, config]
   );
 
   useEffect(() => {

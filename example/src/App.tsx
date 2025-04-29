@@ -7,6 +7,7 @@ import { Basics } from './containers/Basics';
 import { Customizations } from './containers/Customizations';
 import { Updating } from './containers/Updating';
 import { KeyboardAvoiding } from './containers/Keyboard';
+import { Confetti } from './containers/Confetti';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
             <Customizations />
             <Updating />
             <KeyboardAvoiding />
+            <Confetti />
           </ScrollView>
         </SafeAreaView>
         <AlertContainer />

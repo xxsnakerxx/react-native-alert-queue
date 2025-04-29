@@ -1,5 +1,5 @@
 import type { ReactElement, FC } from 'react';
-import type { ColorValue, StyleProp, TextStyle } from 'react-native';
+import type { ColorValue, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import type { AlertConfig } from '../../containers/AlertContainer/types';
 
 type IconProps = {
@@ -7,6 +7,18 @@ type IconProps = {
   stroke?: ColorValue;
   width?: number;
   height?: number;
+};
+
+export type ConfettiProps = {
+  colors?: string[];
+  numberOfPieces: number;
+  opacity?: number;
+  pieceDimensions?: {
+    height: number;
+    width: number;
+  };
+  startOffset?: number;
+  renderPiece?: (props: { style: StyleProp<ViewStyle> }) => ReactElement<any>;
 };
 
 export interface Props<R = unknown> {
@@ -21,6 +33,7 @@ export interface Props<R = unknown> {
   iconSize?: number;
   isDismissible?: boolean;
   message?: string;
+  confetti?: boolean | ConfettiProps;
   onAwaitableDismiss?: (resolve: (value: R) => void) => void;
   onDismiss?: (() => Promise<R>) | (() => R);
   renderMessage?: ({

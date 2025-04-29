@@ -3,6 +3,7 @@ import type {
   AlertButton,
   Props as AlertProps,
   AlertViewProps as AlertViewProps,
+  ConfettiProps,
   ConfirmProps,
 } from '../../components/Alert/types';
 
@@ -47,6 +48,7 @@ export type AlertConfig = {
     size?: number;
     color?: ColorValue;
   };
+  confetti?: ConfettiProps;
   renderTitle?: AlertViewProps['renderTitle'];
   renderMessage?: AlertViewProps['renderMessage'];
   renderDismissButton?: AlertViewProps['renderDismissButton'];
