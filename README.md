@@ -20,6 +20,7 @@ A fully customizable alert system for React Native with promise-based API and qu
 - 🖼️ SVG icon support
 - ⚙️ Global styling and behavior configuration
 - ✅ Built-in helpers for success, error, and confirm dialogs
+- 🎉 Confetti support
 - 🌐 React Native Web support
 
 ## Demo
@@ -42,6 +43,9 @@ yarn add react-native-alert-queue
 ```
 
 ## Usage
+
+> ⚡ **Full working examples available!**
+> Explore the [example app here](https://github.com/xxsnakerxx/react-native-alert-queue/tree/main/example/src/containers) to see all features in action.
 
 ### Basic Setup
 
@@ -125,6 +129,32 @@ const result = await alert.confirm({
   message: 'Are you sure you want to proceed?',
 });
 ```
+
+### Confetti
+
+```tsx
+alert.show({
+  message: 'Welcome to the app!',
+  confetti: true,
+});
+```
+
+```tsx
+alert.show({
+  title: 'Congratulations!',
+  message: 'You are a winner!',
+  confetti: {
+    colors: ['#4CAF50', '#8BC34A', '#CDDC39', '#81C784', '#A5D6A7', '#C8E6C9'],
+    numberOfPieces: 200,
+    pieceDimensions: {
+      height: 10,
+      width: 30,
+    },
+  },
+});
+```
+
+Confetti can be used with any alert type. Also, you can customize the confetti appearance globally in the config.
 
 ### Advanced Features
 
@@ -379,6 +409,7 @@ You can customize the default appearance and behavior of alerts using the `confi
 - `iconColor?: ColorValue` - Icon color
 - `iconSize?: number` - Icon size
 - `buttons?: AlertButton[]` - Array of buttons
+- `confetti?: boolean | ConfettiProps` - Confetti configuration
 - `renderMessage?: ({ style, text }) => ReactElement` - Custom message renderer
 - `renderTitle?: ({ style, text }) => ReactElement` - Custom title renderer
 - `renderButton?: (props) => ReactElement` - Custom button renderer
@@ -456,6 +487,9 @@ type AlertConfig = {
     // Default icon color
     color?: ColorValue;
   };
+
+  // Confetti configuration
+  confetti?: ConfettiProps;
 
   // Custom renderers for alert components
   renderTitle?: AlertProps['renderTitle'];
