@@ -1,6 +1,6 @@
 {
   "name": "react-native-alert-queue",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Fully customizable, promise-based alert system for React Native with queue and async/await support.",
   "source": "./src/index.tsx",
   "main": "./lib/module/index.js",
