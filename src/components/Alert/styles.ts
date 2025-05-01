@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     color: '#000',
     flex: 1,
   },
-  closeButton: {
+  dismissButton: {
     width: 28,
     height: 28,
     borderRadius: 14,

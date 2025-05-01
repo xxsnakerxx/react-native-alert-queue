@@ -80,8 +80,13 @@ export const Alert: FC<AlertViewProps> = (props) => {
   });
 
   const containerStyle = useMemo(
-    () => StyleSheet.flatten([styles.container, containerDimensions]),
-    [containerDimensions]
+    () =>
+      StyleSheet.flatten([
+        styles.container,
+        containerDimensions,
+        config?.alertStyle,
+      ]),
+    [containerDimensions, config?.alertStyle]
   );
 
   const beforeTitleSlotElement = useMemo(() => {
@@ -164,7 +169,7 @@ export const Alert: FC<AlertViewProps> = (props) => {
 
   const renderDismissButtonCb = useCallback(() => {
     const defaultDismissButton = (
-      <Pressable onPress={onDismissButtonPress} style={styles.closeButton}>
+      <Pressable onPress={onDismissButtonPress} style={styles.dismissButton}>
         <CloseIcon width={24} height={24} fill="gray" />
       </Pressable>
     );

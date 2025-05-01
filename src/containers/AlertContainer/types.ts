@@ -1,4 +1,4 @@
-import type { ColorValue } from 'react-native';
+import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import type {
   AlertButton,
   Props as AlertProps,
@@ -48,6 +48,7 @@ export type AlertConfig = {
     size?: number;
     color?: ColorValue;
   };
+  alertStyle?: StyleProp<ViewStyle>;
   confetti?: ConfettiProps;
   renderTitle?: AlertViewProps['renderTitle'];
   renderMessage?: AlertViewProps['renderMessage'];
