@@ -11,15 +11,14 @@ export const useAnimation = ({
   const animation = useSharedValue(isHiding ? 1 : 0);
   const prevIsHidingRef = useRef<boolean>(null);
 
-  if (isHiding !== prevIsHidingRef.current) {
-    animation.value = withTiming(isHiding ? 0 : 1, {
-      duration: animationDuration,
-    });
-  }
-
   useEffect(() => {
+    if (isHiding !== prevIsHidingRef.current) {
+      animation.value = withTiming(isHiding ? 0 : 1, {
+        duration: animationDuration,
+      });
+    }
     prevIsHidingRef.current = isHiding;
-  }, [isHiding]);
+  }, [isHiding, animationDuration, animation]);
 
   return { animation };
 };
