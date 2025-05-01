@@ -31,6 +31,24 @@ export const useController = ({ animationDuration, config }: Props) => {
     };
   }, []);
 
+  useEffect(() => {
+    setCurrentAlert((prev) => {
+      if (prev) {
+        return {
+          ...prev,
+          resolve: prev.resolve,
+          config,
+        };
+      }
+      return prev;
+    });
+
+    // update config in queue
+    queue.current.forEach((alert) => {
+      alert.config = config;
+    });
+  }, [config]);
+
   const show = useCallback(
     (alert: AlertProps) => {
       return new Promise<unknown>((resolve) => {

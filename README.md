@@ -405,6 +405,11 @@ You can customize the default appearance and behavior of alerts using the `confi
   config={{
     testID: 'alert_test_id',
     backdropBackgroundColor: 'rgba(255, 255, 255, 0.5)',
+    alertStyle: {
+      borderRadius: 20,
+      padding: 20,
+      backgroundColor: theme.colors.alert.background,
+    },
     success: {
       icon: SuccessIcon,
       iconColor: 'green',
@@ -480,6 +485,9 @@ type AlertConfig = {
 
   // Background color of the backdrop
   backdropBackgroundColor?: ColorValue;
+
+  // Custom alert style
+  alertStyle?: StyleProp<ViewStyle>;
 
   // Default success alert configuration
   success?: {
