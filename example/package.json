@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",
-    "expo": "^54.0.0",
+    "expo": "~54.0.32",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -22,8 +22,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "react-native-builder-bob": "^0.40.13",
-    "react-native-monorepo-config": "^0.1.9"
+    "react-native-builder-bob": "^0.40.17",
+    "react-native-monorepo-config": "^0.1.10"
   },
   "private": true
 }
