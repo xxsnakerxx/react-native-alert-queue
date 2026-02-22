@@ -82,6 +82,8 @@ Install `RN Reanimated` following [their official guide](https://docs.swmansion.
 npm install react-native-alert-queue
 # or
 yarn add react-native-alert-queue
+# or
+pnpm add react-native-alert-queue
 ```
 
 ## Usage

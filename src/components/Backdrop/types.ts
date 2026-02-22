@@ -1,7 +1,7 @@
-import type { ColorValue } from 'react-native';
+import type { ColorValue } from "react-native";
 
 export type Props = {
-  animationDuration: number;
-  isHiding: boolean;
-  backgroundColor?: ColorValue;
+	animationDuration: number;
+	isHiding: boolean;
+	backgroundColor?: ColorValue;
 };

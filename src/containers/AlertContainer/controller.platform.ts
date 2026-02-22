@@ -1,9 +1,9 @@
-import { useCallback } from 'react';
+import { useCallback } from "react";
 
 export const usePlatformController = () => {
-  const onShow = useCallback(() => {}, []);
+	const onShow = useCallback(() => {}, []);
 
-  const onHide = useCallback(() => {}, []);
+	const onHide = useCallback(() => {}, []);
 
-  return { bottomOffset: 0, onHide, onShow };
+	return { bottomOffset: 0, onHide, onShow };
 };
