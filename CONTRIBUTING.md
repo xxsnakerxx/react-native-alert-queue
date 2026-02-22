@@ -49,17 +49,17 @@ To run the example app on Web:
 pnpm example web
 ```
 
-Make sure your code passes TypeScript and ESLint. Run the following to verify:
+Make sure your code passes TypeScript and Biome. Run the following to verify:
 
 ```sh
 pnpm typecheck
 pnpm lint
 ```
 
-To fix formatting errors, run the following:
+To fix lint and formatting errors, run the following:
 
 ```sh
-pnpm lint --fix
+pnpm lint:fix
 ```
 
 Remember to add tests for your change if possible. Run the unit tests by:
@@ -83,9 +83,9 @@ Our pre-commit hooks verify that your commit message matches this format when co
 
 ### Linting and tests
 
-[ESLint](https://eslint.org/), [Prettier](https://prettier.io/), [TypeScript](https://www.typescriptlang.org/)
+[Biome](https://biomejs.dev/), [TypeScript](https://www.typescriptlang.org/)
 
-We use [TypeScript](https://www.typescriptlang.org/) for type checking, [ESLint](https://eslint.org/) with [Prettier](https://prettier.io/) for linting and formatting the code, and [Jest](https://jestjs.io/) for testing.
+We use [TypeScript](https://www.typescriptlang.org/) for type checking, [Biome](https://biomejs.dev/) for linting and formatting the code, and [Jest](https://jestjs.io/) for testing.
 
 Our pre-commit hooks verify that the linter and tests pass when committing.
 
@@ -105,7 +105,7 @@ The `package.json` file contains various scripts for common tasks:
 
 - `pnpm install`: setup project by installing dependencies.
 - `pnpm typecheck`: type-check files with TypeScript.
-- `pnpm lint`: lint files with ESLint.
+- `pnpm lint`: lint and check formatting with Biome.
 - `pnpm test`: run unit tests with Jest.
 - `pnpm example start`: start the Metro server for the example app.
 - `pnpm example android`: run the example app on Android.
