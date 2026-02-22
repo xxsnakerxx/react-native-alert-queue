@@ -40,7 +40,8 @@
 		"format": "biome format --write .",
 		"clean": "del-cli lib",
 		"prepare": "bob build",
-		"release": "release-it"
+		"release": "release-it",
+		"update-deps": "pnpm dlx npm-check-updates -i --workspaces --format group,repo"
 	},
 	"keywords": [
 		"react-native",
@@ -68,20 +69,20 @@
 		"registry": "https://registry.npmjs.org/"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.0.3",
-		"@commitlint/config-conventional": "^20.3.1",
-		"@evilmartians/lefthook": "^1.13.6",
-		"@release-it/conventional-changelog": "^10.0.4",
-		"@types/jest": "^30.0.0",
-		"@types/react": "^19.0.12",
-		"commitlint": "^20.3.1",
-		"del-cli": "^5.1.0",
-		"jest": "^30.2.0",
+		"@biomejs/biome": "^2.4.4",
+		"@commitlint/config-conventional": "^20.4.2",
+		"@evilmartians/lefthook": "^2.1.1",
+		"@release-it/conventional-changelog": "^10.0.5",
+		"@types/jest": "^29.5.14",
+		"@types/react": "^19.1.17",
+		"commitlint": "^20.4.2",
+		"del-cli": "^7.0.0",
+		"jest": "^29.7.0",
 		"react": "19.1.0",
 		"react-native": "0.81.5",
-		"react-native-builder-bob": "^0.40.17",
+		"react-native-builder-bob": "^0.40.18",
 		"react-native-reanimated": "~4.1.1",
-		"react-native-svg": "15.8.0",
+		"react-native-svg": "15.12.1",
 		"release-it": "^19.2.4",
 		"typescript": "^5.9.3"
 	},

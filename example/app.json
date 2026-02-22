@@ -1,7 +1,7 @@
 {
 	"expo": {
-		"name": "example",
-		"slug": "example",
+		"name": "React Native Alert Queue",
+		"slug": "rn.alert.queue.example",
 		"version": "1.0.0",
 		"orientation": "portrait",
 		"icon": "./assets/icon.png",
@@ -14,14 +14,14 @@
 		},
 		"ios": {
 			"supportsTablet": true,
-			"bundleIdentifier": "alertqueue.example"
+			"bundleIdentifier": "rn.alert.queue.example"
 		},
 		"android": {
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/adaptive-icon.png",
 				"backgroundColor": "#ffffff"
 			},
-			"package": "alertqueue.example"
+			"package": "rn.alert.queue.example"
 		},
 		"web": {
 			"favicon": "./assets/favicon.png"
