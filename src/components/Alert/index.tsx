@@ -1,261 +1,260 @@
 import {
-  type FC,
-  Fragment,
-  type ReactElement,
-  useCallback,
-  useMemo,
-} from 'react';
+	type FC,
+	Fragment,
+	type ReactElement,
+	useCallback,
+	useMemo,
+} from "react";
 import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  type StyleProp,
-  type ViewStyle,
-  Platform,
-} from 'react-native';
+	Platform,
+	Pressable,
+	ScrollView,
+	type StyleProp,
+	StyleSheet,
+	Text,
+	View,
+	type ViewStyle,
+} from "react-native";
 
 import Animated, {
-  useAnimatedStyle,
-  interpolate,
-  CurvedTransition,
-} from 'react-native-reanimated';
-
-import type { AlertViewProps } from './types';
-
-import { CloseIcon } from '../../components/icons/Close';
-
-import { useAnimation } from '../../hooks/useAnimation';
-import { useController } from './controller';
-import { styles } from './styles';
-import { Button } from '../Button';
-import { useContainerDimensions } from './hooks/useContainerDimensions';
+	CurvedTransition,
+	interpolate,
+	useAnimatedStyle,
+} from "react-native-reanimated";
+import { CloseIcon } from "../../components/icons/Close";
+import { useAnimation } from "../../hooks/useAnimation";
+import { Button } from "../Button";
+import { useController } from "./controller";
+import { useContainerDimensions } from "./hooks/useContainerDimensions";
+import { styles } from "./styles";
+import type { AlertViewProps } from "./types";
 
 export const Alert: FC<AlertViewProps> = (props) => {
-  const {
-    afterButtonsSlot,
-    animationDuration,
-    beforeButtonsSlot,
-    beforeMessageSlot,
-    beforeTitleSlot,
-    renderDismissButton,
-    icon,
-    iconColor,
-    iconSize,
-    isDismissible,
-    isHiding,
-    testID,
-    buttons,
-    buttonsDirection = 'column',
-    renderButton,
-    title,
-    renderTitle,
-    message,
-    renderMessage,
-    config,
-  } = props;
+	const {
+		afterButtonsSlot,
+		animationDuration,
+		beforeButtonsSlot,
+		beforeMessageSlot,
+		beforeTitleSlot,
+		renderDismissButton,
+		icon,
+		iconColor,
+		iconSize,
+		isDismissible,
+		isHiding,
+		testID,
+		buttons,
+		buttonsDirection = "column",
+		renderButton,
+		title,
+		renderTitle,
+		message,
+		renderMessage,
+		config,
+	} = props;
 
-  const { animation } = useAnimation({
-    animationDuration,
-    isHiding,
-  });
+	const { animation } = useAnimation({
+		animationDuration,
+		isHiding,
+	});
 
-  const { onDismissButtonPress, onButtonPress } = useController(props);
+	const { onDismissButtonPress, onButtonPress } = useController(props);
 
-  const containerDimensions = useContainerDimensions();
+	const containerDimensions = useContainerDimensions();
 
-  const containerAnimation = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(animation.value, [0, 1], [0, 1]),
-      transform: [
-        {
-          scaleX: interpolate(animation.value, [0, 1], [0.8, 1]),
-        },
-        {
-          scaleY: interpolate(animation.value, [0, 1], [0.8, 1]),
-        },
-      ],
-    };
-  });
+	const containerAnimation = useAnimatedStyle(() => {
+		return {
+			opacity: interpolate(animation.value, [0, 1], [0, 1]),
+			transform: [
+				{
+					scaleX: interpolate(animation.value, [0, 1], [0.8, 1]),
+				},
+				{
+					scaleY: interpolate(animation.value, [0, 1], [0.8, 1]),
+				},
+			],
+		};
+	});
 
-  const containerStyle = useMemo(
-    () =>
-      StyleSheet.flatten([
-        styles.container,
-        containerDimensions,
-        config?.alertStyle,
-      ]),
-    [containerDimensions, config?.alertStyle]
-  );
+	const containerStyle = useMemo(
+		() =>
+			StyleSheet.flatten([
+				styles.container,
+				containerDimensions,
+				config?.alertStyle,
+			]),
+		[containerDimensions, config?.alertStyle],
+	);
 
-  const beforeTitleSlotElement = useMemo(() => {
-    return beforeTitleSlot?.() || config?.beforeTitleSlot?.() || null;
-  }, [beforeTitleSlot, config]);
+	const beforeTitleSlotElement = useMemo(() => {
+		return beforeTitleSlot?.() || config?.beforeTitleSlot?.() || null;
+	}, [beforeTitleSlot, config]);
 
-  const titleContainerStyle = useMemo(() => {
-    const style: StyleProp<ViewStyle>[] = [styles.titleContainer];
+	const titleContainerStyle = useMemo(() => {
+		const style: StyleProp<ViewStyle>[] = [styles.titleContainer];
 
-    if (isDismissible && !(icon || beforeTitleSlotElement)) {
-      style.push(styles.dismissibleTitleContainer);
-    }
+		if (isDismissible && !(icon || beforeTitleSlotElement)) {
+			style.push(styles.dismissibleTitleContainer);
+		}
 
-    return StyleSheet.flatten(style);
-  }, [isDismissible, icon, beforeTitleSlotElement]);
+		return StyleSheet.flatten(style);
+	}, [isDismissible, icon, beforeTitleSlotElement]);
 
-  const renderTitleCb = useCallback(() => {
-    const renderTitleFn = renderTitle || config?.renderTitle;
+	const renderTitleCb = useCallback(() => {
+		const renderTitleFn = renderTitle || config?.renderTitle;
 
-    let titleElement: ReactElement<any> | null = null;
+		let titleElement: ReactElement | null = null;
 
-    if (renderTitleFn) {
-      titleElement = renderTitleFn({ style: styles.title, text: title ?? '' });
-    } else if (title) {
-      titleElement = (
-        <Text numberOfLines={4} style={styles.title}>
-          {title}
-        </Text>
-      );
-    }
+		if (renderTitleFn) {
+			titleElement = renderTitleFn({ style: styles.title, text: title ?? "" });
+		} else if (title) {
+			titleElement = (
+				<Text numberOfLines={4} style={styles.title}>
+					{title}
+				</Text>
+			);
+		}
 
-    return titleElement ? (
-      <View style={titleContainerStyle}>{titleElement}</View>
-    ) : null;
-  }, [title, renderTitle, titleContainerStyle, config]);
+		return titleElement ? (
+			<View style={titleContainerStyle}>{titleElement}</View>
+		) : null;
+	}, [title, renderTitle, titleContainerStyle, config]);
 
-  const beforeMessageSlotElement = useMemo(() => {
-    return beforeMessageSlot?.() || config?.beforeMessageSlot?.() || null;
-  }, [beforeMessageSlot, config]);
+	const beforeMessageSlotElement = useMemo(() => {
+		return beforeMessageSlot?.() || config?.beforeMessageSlot?.() || null;
+	}, [beforeMessageSlot, config]);
 
-  const renderMessageCb = useCallback(() => {
-    const renderMessageFn = renderMessage || config?.renderMessage;
+	const renderMessageCb = useCallback(() => {
+		const renderMessageFn = renderMessage || config?.renderMessage;
 
-    let messageElement: ReactElement<any> | null = null;
+		let messageElement: ReactElement | null = null;
 
-    if (renderMessageFn) {
-      messageElement = renderMessageFn({
-        style: styles.message,
-        text: message ?? '',
-      });
-    } else if (message) {
-      messageElement = <Text style={styles.message}>{message}</Text>;
-    }
+		if (renderMessageFn) {
+			messageElement = renderMessageFn({
+				style: styles.message,
+				text: message ?? "",
+			});
+		} else if (message) {
+			messageElement = <Text style={styles.message}>{message}</Text>;
+		}
 
-    return messageElement ? (
-      <ScrollView bounces={false} style={styles.messageContainer}>
-        {messageElement}
-      </ScrollView>
-    ) : null;
-  }, [message, renderMessage, config]);
+		return messageElement ? (
+			<ScrollView bounces={false} style={styles.messageContainer}>
+				{messageElement}
+			</ScrollView>
+		) : null;
+	}, [message, renderMessage, config]);
 
-  const renderIconCb = useCallback(() => {
-    const Svg = icon;
+	const renderIconCb = useCallback(() => {
+		const Svg = icon;
 
-    const iconConfig = config?.icon;
+		const iconConfig = config?.icon;
 
-    const defaultIconSize = iconSize || iconConfig?.size || 72;
-    const defaultIconColor = iconColor || iconConfig?.color || 'black';
+		const defaultIconSize = iconSize || iconConfig?.size || 72;
+		const defaultIconColor = iconColor || iconConfig?.color || "black";
 
-    return Svg ? (
-      <View style={styles.iconContainer}>
-        <Svg
-          fill={defaultIconColor}
-          width={defaultIconSize}
-          height={defaultIconSize}
-        />
-      </View>
-    ) : null;
-  }, [icon, iconColor, iconSize, config]);
+		return Svg ? (
+			<View style={styles.iconContainer}>
+				<Svg
+					fill={defaultIconColor}
+					width={defaultIconSize}
+					height={defaultIconSize}
+				/>
+			</View>
+		) : null;
+	}, [icon, iconColor, iconSize, config]);
 
-  const renderDismissButtonCb = useCallback(() => {
-    const defaultDismissButton = (
-      <Pressable onPress={onDismissButtonPress} style={styles.dismissButton}>
-        <CloseIcon width={24} height={24} fill="gray" />
-      </Pressable>
-    );
+	const renderDismissButtonCb = useCallback(() => {
+		const defaultDismissButton = (
+			<Pressable onPress={onDismissButtonPress} style={styles.dismissButton}>
+				<CloseIcon width={24} height={24} fill="gray" />
+			</Pressable>
+		);
 
-    const dismissButton = isDismissible
-      ? renderDismissButton?.({ onPress: onDismissButtonPress }) ||
-        config?.renderDismissButton?.({ onPress: onDismissButtonPress }) ||
-        defaultDismissButton
-      : null;
+		const dismissButton = isDismissible
+			? renderDismissButton?.({ onPress: onDismissButtonPress }) ||
+				config?.renderDismissButton?.({ onPress: onDismissButtonPress }) ||
+				defaultDismissButton
+			: null;
 
-    return dismissButton;
-  }, [isDismissible, onDismissButtonPress, renderDismissButton, config]);
+		return dismissButton;
+	}, [isDismissible, onDismissButtonPress, renderDismissButton, config]);
 
-  const buttonsContainerStyle = useMemo(() => {
-    return StyleSheet.compose(styles.buttonsContainer, {
-      flexDirection: buttonsDirection,
-      gap: config?.buttons?.gap || 10,
-    });
-  }, [buttonsDirection, config]);
+	const buttonsContainerStyle = useMemo(() => {
+		return StyleSheet.compose(styles.buttonsContainer, {
+			flexDirection: buttonsDirection,
+			gap: config?.buttons?.gap || 10,
+		});
+	}, [buttonsDirection, config]);
 
-  const beforeButtonsSlotElement = useMemo(() => {
-    return beforeButtonsSlot?.() || config?.beforeButtonsSlot?.() || null;
-  }, [beforeButtonsSlot, config]);
+	const beforeButtonsSlotElement = useMemo(() => {
+		return beforeButtonsSlot?.() || config?.beforeButtonsSlot?.() || null;
+	}, [beforeButtonsSlot, config]);
 
-  const afterButtonsSlotElement = useMemo(() => {
-    return afterButtonsSlot?.() || config?.afterButtonsSlot?.() || null;
-  }, [afterButtonsSlot, config]);
+	const afterButtonsSlotElement = useMemo(() => {
+		return afterButtonsSlot?.() || config?.afterButtonsSlot?.() || null;
+	}, [afterButtonsSlot, config]);
 
-  const renderButtonsCb = useCallback(() => {
-    if (buttons?.length) {
-      return (
-        <View style={buttonsContainerStyle}>
-          {buttons.map((button, i) => {
-            const renderFn = renderButton || config?.buttons?.render;
+	const renderButtonsCb = useCallback(() => {
+		if (buttons?.length) {
+			return (
+				<View style={buttonsContainerStyle}>
+					{buttons.map((button, i) => {
+						const renderFn = renderButton || config?.buttons?.render;
 
-            if (renderFn) {
-              return (
-                <Fragment key={i}>
-                  {renderFn({
-                    text: button.text,
-                    onPress: () => onButtonPress(button),
-                    disabled: button.disabled,
-                    testID: button.testID,
-                    customProps: button.customProps,
-                  })}
-                </Fragment>
-              );
-            }
+						if (renderFn) {
+							return (
+								// biome-ignore lint/suspicious/noArrayIndexKey: it's ok here
+								<Fragment key={i}>
+									{renderFn({
+										text: button.text,
+										onPress: () => onButtonPress(button),
+										disabled: button.disabled,
+										testID: button.testID,
+										customProps: button.customProps,
+									})}
+								</Fragment>
+							);
+						}
 
-            return (
-              <Button
-                key={i}
-                text={button.text}
-                onPress={() => onButtonPress(button)}
-                disabled={button.disabled}
-                testID={button.testID}
-              />
-            );
-          })}
-        </View>
-      );
-    }
+						return (
+							<Button
+								// biome-ignore lint/suspicious/noArrayIndexKey: it's ok here
+								key={i}
+								text={button.text}
+								onPress={() => onButtonPress(button)}
+								disabled={button.disabled}
+								testID={button.testID}
+							/>
+						);
+					})}
+				</View>
+			);
+		}
 
-    return null;
-  }, [buttons, onButtonPress, buttonsContainerStyle, renderButton, config]);
+		return null;
+	}, [buttons, onButtonPress, buttonsContainerStyle, renderButton, config]);
 
-  const layoutAnimation = useMemo(() => {
-    return Platform.select({
-      web: undefined,
-      default: CurvedTransition,
-    });
-  }, []);
+	const layoutAnimation = useMemo(() => {
+		return Platform.select({
+			web: undefined,
+			default: CurvedTransition,
+		});
+	}, []);
 
-  return (
-    <Animated.View style={containerAnimation} layout={layoutAnimation}>
-      <View style={containerStyle} testID={testID || config?.testID || 'Alert'}>
-        {renderIconCb()}
-        {beforeTitleSlotElement}
-        {renderTitleCb()}
-        {beforeMessageSlotElement}
-        {renderMessageCb()}
-        {beforeButtonsSlotElement}
-        {renderDismissButtonCb()}
-        {renderButtonsCb()}
-        {afterButtonsSlotElement}
-      </View>
-    </Animated.View>
-  );
+	return (
+		<Animated.View style={containerAnimation} layout={layoutAnimation}>
+			<View style={containerStyle} testID={testID || config?.testID || "Alert"}>
+				{renderIconCb()}
+				{beforeTitleSlotElement}
+				{renderTitleCb()}
+				{beforeMessageSlotElement}
+				{renderMessageCb()}
+				{beforeButtonsSlotElement}
+				{renderDismissButtonCb()}
+				{renderButtonsCb()}
+				{afterButtonsSlotElement}
+			</View>
+		</Animated.View>
+	);
 };
