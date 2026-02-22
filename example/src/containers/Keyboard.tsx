@@ -20,16 +20,14 @@ export const KeyboardAvoiding = () => {
 									onChangeText={(text) => {
 										reason = text;
 									}}
-									style={[
-										{
-											textAlignVertical: "top",
-											borderWidth: 1,
-											borderColor: "gray",
-											borderRadius: 5,
-											padding: 10,
-											height: 100,
-										},
-									]}
+									style={{
+										textAlignVertical: "top",
+										borderWidth: 1,
+										borderColor: "gray",
+										borderRadius: 5,
+										padding: 10,
+										height: 100,
+									}}
 									multiline
 								/>
 							);
