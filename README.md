@@ -4,7 +4,7 @@ React Native alert & dialog library. Queue multiple alerts, use async/await, and
 
 [![npm version](https://img.shields.io/npm/v/react-native-alert-queue?style=flat-square)](https://www.npmjs.com/package/react-native-alert-queue)
 [![npm downloads](https://img.shields.io/npm/dm/react-native-alert-queue?style=flat-square)](https://www.npmjs.com/package/react-native-alert-queue)
-[![Run in Expo Snack](https://img.shields.io/badge/Run%20in-Expo%20Snack-4630EB.svg?logo=expo)](https://snack.expo.dev/@xxsnakerxx/react-native-alert-queue)
+[![Run in Expo Snack](https://img.shields.io/badge/Run%20in-Expo%20Snack-4630EB.svg?logo=expo&style=flat-square)](https://snack.expo.dev/@xxsnakerxx/react-native-alert-queue)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/xxsnakerxx?style=flat-square)](https://github.com/sponsors/xxsnakerxx)
 
