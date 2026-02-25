@@ -36,7 +36,7 @@ export const ConfettiPiece: FC<ConfettiPieceProps> = ({
 	const clock = useSharedValue(0);
 	const duration = useSharedValue(getDuration());
 
-	// Because our clock.value is going from 0 to 1, it's value will let us
+	// Because our clock.value is going from 0 to 1, its value will let us
 	// get the actual number of milliseconds by taking it multiplied by the
 	// total duration of the animation.
 	const timeDiff = useDerivedValue(() => clock.value * duration.value);

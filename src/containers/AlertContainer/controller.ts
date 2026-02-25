@@ -206,7 +206,7 @@ export const useController = ({ animationDuration, config }: Props) => {
 					alert,
 				);
 			} else if (passedButtons) {
-				// biome-ignore lint/style/noNonNullAssertion: ww checked the length above
+				// biome-ignore lint/style/noNonNullAssertion: we checked the length above
 				const resolveButton = passedButtons[0]!;
 				// biome-ignore lint/style/noNonNullAssertion: we checked the length above
 				const rejectButton = passedButtons[1]!;

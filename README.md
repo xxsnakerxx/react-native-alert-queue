@@ -116,7 +116,7 @@ function App() {
 
 ### Showing Alerts
 
-Any where in your app you can show alerts by using the `alert` object:
+Anywhere in your app you can show alerts by using the `alert` object:
 
 ```tsx
 import { alert } from 'react-native-alert-queue';
