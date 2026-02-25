@@ -1,7 +1,7 @@
 {
 	"name": "react-native-alert-queue",
 	"version": "2.2.1",
-	"description": "Fully customizable, promise-based alert system for React Native with queue and async/await support.",
+	"description": "React Native alert & dialog library. Queue multiple alerts, use async/await, and replace Alert.alert with a customizable, promise-based modal system.",
 	"source": "./src/index.tsx",
 	"main": "./lib/module/index.js",
 	"types": "./lib/typescript/src/index.d.ts",
@@ -45,15 +45,21 @@
 	},
 	"keywords": [
 		"react-native",
-		"react native",
 		"alert",
+		"alert-queue",
 		"dialog",
+		"modal",
+		"Alert.alert",
+		"confirmation-dialog",
+		"popup",
 		"promise",
 		"async",
+		"async-await",
 		"queue",
-		"modal",
-		"ui",
-		"react"
+		"react native alert",
+		"react native modal",
+		"react native dialog",
+		"ui"
 	],
 	"repository": {
 		"type": "git",

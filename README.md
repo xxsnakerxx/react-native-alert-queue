@@ -1,6 +1,6 @@
 # react-native-alert-queue
 
-A fully customizable alert system for React Native with promise-based API and queue support
+React Native alert & dialog library. Queue multiple alerts, use async/await, and replace `Alert.alert` with a customizable, promise-based modal system.
 
 [![npm version](https://img.shields.io/npm/v/react-native-alert-queue?style=flat-square)](https://www.npmjs.com/package/react-native-alert-queue)
 [![npm downloads](https://img.shields.io/npm/dm/react-native-alert-queue?style=flat-square)](https://www.npmjs.com/package/react-native-alert-queue)
