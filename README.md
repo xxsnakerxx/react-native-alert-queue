@@ -439,7 +439,7 @@ You can customize the default appearance and behavior of alerts using the `confi
 
 - `show(alert: AlertProps)` - Shows a custom alert
 - `success(alert: AlertProps)` - Shows a success alert
-- `error(error: Error, isFixable?: boolean)` - Shows an error alert
+- `error(error: Error)` - Shows an error alert
 - `confirm(alert?: ConfirmProps)` - Shows a confirmation dialog
 - `hide()` - Hides the currently displayed alert
 - `clearQueue(hideDisplayedAlert?: boolean)` - Clears the alert queue

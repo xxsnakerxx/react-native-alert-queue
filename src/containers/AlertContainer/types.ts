@@ -10,7 +10,7 @@ import type {
 export type Alert = {
 	clearQueue: (hideDisplayedAlert?: boolean) => void;
 	confirm: (alert?: ConfirmProps) => Promise<boolean>;
-	error: <R = unknown>(error: Error, isFixable?: boolean) => Promise<R>;
+	error: <R = unknown>(error: Error) => Promise<R>;
 	getAlertData: <R = unknown>(id: string) => AlertProps<R> | undefined;
 	hide: () => void;
 	isShown: boolean;
