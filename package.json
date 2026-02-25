@@ -1,6 +1,6 @@
 {
 	"name": "react-native-alert-queue",
-	"version": "2.2.2",
+	"version": "2.2.3",
 	"description": "React Native alert & dialog library. Queue multiple alerts, use async/await, and replace Alert.alert with a customizable, promise-based modal system.",
 	"source": "./src/index.tsx",
 	"main": "./lib/module/index.js",
