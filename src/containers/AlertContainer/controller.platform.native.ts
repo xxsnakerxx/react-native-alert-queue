@@ -49,17 +49,15 @@ export const usePlatformController = () => {
 			);
 		}
 
-		if (Platform.OS === "ios") {
-			keyboardDidShowSub.current = Keyboard.addListener(
-				"keyboardDidShow",
-				onKeyboardDidShow,
-			);
+		keyboardDidShowSub.current = Keyboard.addListener(
+			"keyboardDidShow",
+			onKeyboardDidShow,
+		);
 
-			keyboardDidHideSub.current = Keyboard.addListener(
-				"keyboardDidHide",
-				onKeyboardDidHide,
-			);
-		}
+		keyboardDidHideSub.current = Keyboard.addListener(
+			"keyboardDidHide",
+			onKeyboardDidHide,
+		);
 	}, [onKeyboardDidHide, onKeyboardDidShow]);
 
 	const onHide = useCallback(() => {
@@ -71,10 +69,8 @@ export const usePlatformController = () => {
 			androidBackButtonPressSub.current?.remove();
 		}
 
-		if (Platform.OS === "ios") {
-			keyboardDidShowSub.current?.remove();
-			keyboardDidHideSub.current?.remove();
-		}
+		keyboardDidShowSub.current?.remove();
+		keyboardDidHideSub.current?.remove();
 
 		setKeyboardHeight(0);
 	}, []);
