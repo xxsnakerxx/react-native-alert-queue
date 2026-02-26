@@ -32,7 +32,10 @@ export type Props = {
 
 export type AlertConfig = {
 	testID?: string;
-	backdropBackgroundColor?: ColorValue;
+	backdrop?: {
+		backgroundColor?: ColorValue;
+		children?: React.ReactNode;
+	};
 	success?: Partial<
 		Pick<AlertProps, "icon" | "iconColor" | "iconSize" | "title">
 	>;

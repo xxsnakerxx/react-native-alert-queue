@@ -412,7 +412,9 @@ You can customize the default appearance and behavior of alerts using the `confi
 <AlertContainer
   config={{
     testID: 'alert_test_id',
-    backdropBackgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backdrop: {
+      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    },
     alertStyle: {
       borderRadius: 20,
       padding: 20,
@@ -491,8 +493,12 @@ type AlertConfig = {
   // Test identifier for the alert
   testID?: string;
 
-  // Background color of the backdrop
-  backdropBackgroundColor?: ColorValue;
+  backdrop?: {
+    // Background color of the backdrop
+    backgroundColor?: ColorValue;
+    // Custom content to render inside the backdrop
+    children?: React.ReactNode;
+  };
 
   // Custom alert style
   alertStyle?: StyleProp<ViewStyle>;

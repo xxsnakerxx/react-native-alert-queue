@@ -89,8 +89,10 @@ export const AlertContainer: FC<Props> = ({
 			<Backdrop
 				animationDuration={animationDuration}
 				isHiding={isHiding}
-				backgroundColor={config?.backdropBackgroundColor}
-			/>
+				backgroundColor={config?.backdrop?.backgroundColor}
+			>
+				{config?.backdrop?.children}
+			</Backdrop>
 			{renderConfetti()}
 			<Alert
 				{...currentAlert}
