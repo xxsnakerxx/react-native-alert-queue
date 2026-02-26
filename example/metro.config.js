@@ -6,6 +6,7 @@ const defaultConfig = getDefaultConfig(__dirname);
 
 const projectRoot = __dirname;
 const monorepoRoot = path.resolve(projectRoot, "..");
+const libSrcRoot = path.join(monorepoRoot, "src");
 
 /**
  * Metro configuration
@@ -21,6 +22,17 @@ const config = {
 			path.resolve(monorepoRoot, "node_modules"),
 		],
 		unstable_enablePackageExports: true,
+		// Resolve workspace lib to source so Fast Refresh works when editing src/
+		resolveRequest: (context, moduleName, platform) => {
+			if (moduleName === "react-native-alert-queue") {
+				return {
+					filePath: path.join(libSrcRoot, "index.tsx"),
+					type: "sourceFile",
+				};
+			}
+
+			return context.resolveRequest(context, moduleName, platform);
+		},
 	},
 };
 
