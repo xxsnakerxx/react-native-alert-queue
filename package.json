@@ -75,13 +75,13 @@
 		"registry": "https://registry.npmjs.org/"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.4",
-		"@commitlint/config-conventional": "20.4.2",
-		"@evilmartians/lefthook": "2.1.1",
+		"@biomejs/biome": "2.4.5",
+		"@commitlint/config-conventional": "20.4.3",
+		"@evilmartians/lefthook": "2.1.2",
 		"@release-it/conventional-changelog": "10.0.5",
 		"@types/jest": "30.0.0",
 		"@types/react": "19.2.14",
-		"commitlint": "20.4.2",
+		"commitlint": "20.4.3",
 		"del-cli": "7.0.0",
 		"jest": "30.2.0",
 		"react": "19.2.4",
